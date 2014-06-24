@@ -39,17 +39,19 @@ var ConfiguracionRouter = Backbone.Router.extend({
 		this.mainView.$('.col-sm-10').empty().append(view.render().$el);
 	} ,
 	editPersona: function (id) {
-		console.log(id);
 		var persona = new Persona({
 			id: id
+		}), me = this;
+		persona.fetch({
+			success: function () {
+				me.initWorkspace();
+				var view = new PersonaFormView({
+					model: persona,
+					collection: app.collections.personas
+				});
+				$('#workspace').empty().append(me.mainView.render().$el);
+				me.mainView.$('.col-sm-10').empty().append(view.render().$el);
+			}
 		});
-		persona.fetch();
-		this.initWorkspace();
-		var view = new PersonaFormView({
-			model: persona,
-			collection: app.collections.personas
-		});
-		$('#workspace').empty().append(this.mainView.render().$el);
-		this.mainView.$('.col-sm-10').empty().append(view.render().$el);
 	} 
 });

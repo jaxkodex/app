@@ -52,6 +52,7 @@ var PersonaFormView = Backbone.View.extend({
 	},
 	template: _.template(app.templates.configPersonaViewTemplate),
 	render: function () {
+		console.log(this.model.toJSON());
 		this.$el.html(this.template(this.model.toJSON() || {}));
 		this.delegateEvents();
 		return this;
@@ -75,7 +76,7 @@ var PersonaFormView = Backbone.View.extend({
 	}
 });
 
-app.templates.configPersonaListViewTemplate = '<a href="#config/persona/edit" class="btn btn-default btn-sm">Nueva</a>\
+app.templates.configPersonaListViewTemplate = '<a href="#config/persona/new" class="btn btn-default btn-sm">Nueva</a>\
 	<table class="table">\
 	<thead><tr><th>DNI</th><th>Apellido Paterno</th><th>Apellido Materno</th><th>Primer Nombre</th><th>Segundo Nombre</th><th></th></tr>\
 	</thead>\
