@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.Formula;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
@@ -35,9 +33,6 @@ public class Persona implements Serializable {
 
 	@Column(name="persona_snombre")
 	private String personaSnombre;
-	
-	@Formula("persona_pnombre || ' ' || persona_snombre || ' ' || persona_pnombre || ' ' || persona_snombre")
-	private String personaNombreCompleto;
 
 	//bi-directional many-to-many association to Cargo
 	@JsonIgnore
@@ -131,6 +126,4 @@ public class Persona implements Serializable {
 		return observador;
 	}
 
-	public String getPersonaNombreCompleto () { return this.personaNombreCompleto; }
-	public void setPersonaNombreCompleto (String personaNombreCompleto) { this.personaNombreCompleto = personaNombreCompleto; }
 }

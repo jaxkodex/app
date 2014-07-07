@@ -7,6 +7,7 @@ import org.educando.app.model.InstitucionEducativa;
 import org.educando.app.service.InstitucionEducativaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,24 +29,32 @@ public class InstitucionEducativaController {
 		return institucionEducativa;
 	}
 
-	@RequestMapping(value= "", method=RequestMethod.GET)
+	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.GET)
 	@ResponseBody
-	public List<InstitucionEducativa> list () {
-		logger.debug("Listando objetos");
-		return institucionEducativaService.buscaPorNombre("");
+	public InstitucionEducativa load (@PathVariable Integer idInstitucion) {
+		logger.debug("Load Object");
+		return institucionEducativaService.loadById(idInstitucion);
 	}
 
-	@RequestMapping(value= "", method=RequestMethod.PUT)
+	@RequestMapping(value= "", method=RequestMethod.GET)
 	@ResponseBody
-	public InstitucionEducativa update (@RequestBody InstitucionEducativa institucionEducativa) {
+	public List<InstitucionEducativa> list (@RequestParam(defaultValue="", required=false) String query) {
+		logger.debug("Listando objetos");
+		return institucionEducativaService.buscaPorNombre(query);
+	}
+
+	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.PUT)
+	@ResponseBody
+	public InstitucionEducativa update (@RequestBody InstitucionEducativa institucionEducativa, @PathVariable Integer idInstitucion) {
 		logger.debug("Actualizando ie");
+		institucionEducativaService.update(institucionEducativa);
 		return institucionEducativa;
 	}
 
-	@RequestMapping(value= "", method=RequestMethod.DELETE)
+	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.DELETE)
 	@ResponseBody
-	public boolean update (@RequestParam(required=true) Integer id) {
+	public void delete (@PathVariable Integer idInstitucion) {
 		logger.debug("Actualizando ie");
-		return true;
+		institucionEducativaService.delete(idInstitucion);
 	}
 }

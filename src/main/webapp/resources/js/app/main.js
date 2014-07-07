@@ -2,15 +2,18 @@
  * Monitoreo Web v1.0
  */
 
-var app = {
+/*var app = {
 		router: {},
 		views: {},
 		models: {},
 		collections: {},
 		workspaceLoaded: false
-};
+};*/
+
+var app = app || {};
 
 $(function () {
+	/*
 	app.models.persona = new Persona();
 	app.collections.personas = new PersonaCollection();
 	app.views.workspace = new WorkspaceView();
@@ -28,5 +31,10 @@ $(function () {
 	app.router.configuracion = new ConfiguracionRouter();
 	
 	app.router.workspace.home();
+	Backbone.history.start();
+	*/
+	app.workspace = new WorkspaceView ();
+	new WorkspaceRouter;
+	new AdminRouter;
 	Backbone.history.start();
 });

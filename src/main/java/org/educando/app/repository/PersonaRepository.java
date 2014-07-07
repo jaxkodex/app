@@ -11,6 +11,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 	
 	public List<Persona> findAll ();
 	public Persona findByPersonaDni (String personaDni);
-	@Query("SELECT p FROM Persona p where p.personaDni like %:query% or p.personaNombreCompleto like %:query%")
+//	@Query("SELECT p FROM Persona p where p.personaDni like %:query% or p.personaNombreCompleto like %:query%")
+	@Query("SELECT p FROM Persona p where p.personaDni like %:query%")
 	public List<Persona> search (@Param("query") String query);
 }

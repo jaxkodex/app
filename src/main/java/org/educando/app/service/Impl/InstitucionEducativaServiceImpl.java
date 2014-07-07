@@ -24,12 +24,32 @@ public class InstitucionEducativaServiceImpl implements
 		return institucionEducativaRepository.findByInstitucionNombre(nombre);
 	}
 
+	@Override
+	public List<InstitucionEducativa> listAll () {
+		return institucionEducativaRepository.findAll();
+	}
+
 	@Transactional
 	@Override
 	public InstitucionEducativa crear(InstitucionEducativa institucionEducativa) {
 		logger.debug("Registrando Institucion educativa "+institucionEducativa);
 		institucionEducativaRepository.save(institucionEducativa);
 		return institucionEducativa;
+	}
+
+	@Override
+	public void update(InstitucionEducativa institucionEducativa) {
+		institucionEducativaRepository.save(institucionEducativa);
+	}
+
+	@Override
+	public void delete(Integer idInstitucion) {
+		institucionEducativaRepository.delete(idInstitucion);
+	}
+
+	@Override
+	public InstitucionEducativa loadById(Integer idInstitucion) {
+		return institucionEducativaRepository.findOne(idInstitucion);
 	}
 
 }

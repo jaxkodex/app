@@ -23,6 +23,7 @@ public class Cargo implements Serializable {
 	@Column(name="id_cargo")
 	private int idCargo;
 
+	@Column(name="activo")
 	private byte activo;
 
 	@Column(name="cargo_codigo")

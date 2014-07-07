@@ -7,7 +7,10 @@ var ConfiguracionRouter = Backbone.Router.extend({
 		'config': 'index',
 		'config/persona': 'listPersona',
 		'config/persona/new': 'newPersona',
-		'config/persona/edit/:id': 'editPersona'
+		'config/persona/edit/:id': 'editPersona',
+		'config/institucion': 'institucion',
+		'config/institucion/form': 'institucionForm',
+		'config/institucion/form/:id': 'institucionForm'
 	},
 	initWorkspace: function () {
 		if (typeof this.mainView == 'undefined') {
@@ -53,5 +56,34 @@ var ConfiguracionRouter = Backbone.Router.extend({
 				me.mainView.$('.col-sm-10').empty().append(view.render().$el);
 			}
 		});
-	} 
+	},
+	institucion: function () {
+		this.initWorkspace();
+		var view = new InstitucionEducativaListView({
+			collection: new InstitucionEducativaCollection ()
+		});
+		//view.render().$el.appendTo(this.mainView.$el.find('.col-sm-10').empty());
+		this.mainView.$('.col-sm-10').empty().append(view.render().$el);
+	},
+	institucionForm: function (id) {
+		this.initWorkspace();
+		var view = new InstitucionEducativaFormView({
+			model: new InstitucionEducativaModel ()
+		});
+		//view.render().$el.appendTo(this.mainView.$el.find('.col-sm-10').empty());
+		this.mainView.$('.col-sm-10').empty().append(view.render().$el);
+		if (id != null) {
+			view.model.set('idInstitucion', id).fetch({
+				success: function () {
+					console.log(view.model.toJSON());
+					view.render();
+				}
+			});
+		}
+	}
 });
+
+
+
+
+

@@ -28,10 +28,13 @@
 	<script type="text/javascript" src="resources/js/backbone.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="resources/js/app/model/Persona.js"></script>
+	<script type="text/javascript" src="resources/js/app/model/InstitucionEducativaModel.js"></script>
 	<script type="text/javascript" src="resources/js/app/collection/PersonaCollection.js"></script>
+	<script type="text/javascript" src="resources/js/app/collection/InstitucionEducativaCollection.js"></script>
 	<script type="text/javascript" src="resources/js/app/view/workspace_view.js"></script>
 	<script type="text/javascript" src="resources/js/app/view/config_view.js"></script>
 	<script type="text/javascript" src="resources/js/app/view/config_persona_view.js"></script>
+	<script type="text/javascript" src="resources/js/app/view/InstitucionEducativaView.js"></script>
 	<script type="text/javascript" src="resources/js/app/router/workspace.js"></script>
 	<script type="text/javascript" src="resources/js/app/router/evaluaciones.js"></script>
 	<script type="text/javascript" src="resources/js/app/router/configuraciones.js"></script>
