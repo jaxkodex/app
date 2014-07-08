@@ -15,7 +15,7 @@ var AdminRouter = Backbone.Router.extend({
 			collection: this.institucionCollection,
 			router: this
 		});
-		view.$el.appendTo('#workspace');
+		$('#workspace').empty().append(view.$el);
 		view.collection.fetch({
 			silent: true, 
 			success: function () {
@@ -32,10 +32,13 @@ var AdminRouter = Backbone.Router.extend({
 				idInstitucion: id
 			});
 		}
+		console.log(model);
+		console.log(model.toJSON());
 		var view = new InstitucionEducativaFormView ({
-			model: model
+			model: model,
+			router: this
 		});
-		view.$el.appendTo('#workspace');
-		if (id != null) view.model.fetch();
+		$('#workspace').empty().append(view.render().$el);
+		if (id != null) view.model.fetch(); 
 	}
 });

@@ -38,18 +38,19 @@
 <td><\%=institucionLema%></td>
 <td><input type="checkbox" <\% if (institucionActivo == true) { %>checked<\% }%> /></td>
 <td>
-	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+	<button class="btn btn-sm btn-default edit"><span class="glyphicon glyphicon-pencil"></span></button>
 	<button class="btn btn-sm btn-default delete"><span class="glyphicon glyphicon-remove"></span></button>
 </td>
 </script>
 <script type="text/template" id="institucionEducativaForm">
 <form>
 <div class="form-group">
-	<label for="institucionNombre">Nombre:</label>
+	<label class="control-label" for="institucionNombre">Nombre:</label>
 	<input type="text" class="form-control" id="institucionNombre" value="<\%=institucionNombre%>" />
+	<span class="help-block hidden">Este campo es obligatorio.</span>
 </div>
 <div class="form-group">
-	<label for="institucionLema">Lema:</label>
+	<label class="control-label" for="institucionLema">Lema:</label>
 	<input type="text" class="form-control" id="institucionLema" value="<\%=institucionLema%>" />
 </div>
 <div class="checkbox">
@@ -58,8 +59,8 @@
 		Activo
 	</label>
 </div>
-<button type="buttom" class="btn btn-default">Cancelar</button>
-<button type="submit" class="btn btn-default">Guardar</button>
+<input type="button" class="btn btn-default cancel" value="Cancelar" />
+<input type="submit" class="btn btn-default" value="Guardar" />
 </from>
 </script>
 <script type="text/template" id="periodoAcademicoList">
@@ -124,8 +125,8 @@
 		Activo
 	</label>
 </div>
-<button type="buttom" class="btn btn-default">Cancelar</button>
-<button type="submit" class="btn btn-default">Guardar</button>
+<input type="button" class="btn btn-default cancel" value="Cancelar" />
+<input type="submit" class="btn btn-default" value="Guardar" />
 </from>
 </script>
 <script type="text/template" id="asignacionDocenteList">
