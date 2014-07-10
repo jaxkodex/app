@@ -2,20 +2,25 @@
  * 
  */
 
+var app = app || {};
+
 var AdminRouter = Backbone.Router.extend({
 	initialize: function () {
 		this.institucionCollection = new InstitucionEducativaCollection()
+		this.cargoCollection = new CargoCollection();
 	},
 	routes: {
 		'institucioneducativa': 'institucioneducativa',
-		'institucioneducativa/edit(/:id)': 'editinstitucioneducativa'
+		'institucioneducativa/edit(/:id)': 'editinstitucioneducativa',
+		'cargo': 'cargoIndex'
 	},
 	institucioneducativa: function () {
 		var view = new InstitucionEducativaListView ({
 			collection: this.institucionCollection,
 			router: this
 		});
-		$('#workspace').empty().append(view.$el);
+		app.workspace.getWorkspaceArea().empty().append(view.$el);
+		//$('#workspace').empty().append(view.$el);
 		view.collection.fetch({
 			silent: true, 
 			success: function () {
@@ -38,7 +43,20 @@ var AdminRouter = Backbone.Router.extend({
 			model: model,
 			router: this
 		});
-		$('#workspace').empty().append(view.render().$el);
+		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
+		//$('#workspace').empty().append(view.render().$el);
 		if (id != null) view.model.fetch(); 
+	},
+	cargoIndex: function () {
+		var view = new CargoListView({
+			collection: this.cargoCollection
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.$el);
+		view.collection.fetch({
+			silent: true, 
+			success: function () {
+				view.collection.trigger('add');
+			}
+		});
 	}
 });

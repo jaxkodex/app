@@ -24,7 +24,7 @@ public class Cargo implements Serializable {
 	private int idCargo;
 
 	@Column(name="activo")
-	private byte activo;
+	private boolean activo;
 
 	@Column(name="cargo_codigo")
 	private String cargoCodigo;
@@ -48,11 +48,11 @@ public class Cargo implements Serializable {
 		this.idCargo = idCargo;
 	}
 
-	public byte getActivo() {
+	public boolean getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 

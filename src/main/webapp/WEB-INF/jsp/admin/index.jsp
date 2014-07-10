@@ -16,9 +16,26 @@
 </head>
 <body>
 
-<div id="workspace"></div>
+<div class="container-fluid">
+	<div id="workspace" class="row"></div>
+</div>
 
 <!-- Templates -->
+
+<script type="text/template" id="workspaceTemplate">
+<div class="col-sm-2">
+	<ul class="list-unstyled">
+		<li>Administración
+			<ul>
+				<li><a href="#institucioneducativa">Institucion Educación</a></li>
+				<li><a href="#cargo">Cargo</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="col-sm-10"></div>
+<!--div></div-->
+</script>
 <script type="text/template" id="institucionEducativaList">
 <div class="col-sm-12"><button class="btn btn-sm btn-primary pull-right new"><span class="glyphicon glyphicon-plus"></span></button></div>
 <table class="table table-striped">
@@ -158,12 +175,15 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PersonaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/InstitucionEducativaModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/CargoModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/CargoCollection.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/CargoView.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
