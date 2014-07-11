@@ -4,5 +4,10 @@
 
 
 var CargoModel = Backbone.Model.extend({
-	idAttribute: 'idCargo'
+	idAttribute: 'idCargo',
+	defaults: {
+		activo: true,
+		cargoCodigo: '',
+		cargoDescripcion: ''
+	}
 });

@@ -12,7 +12,8 @@ var AdminRouter = Backbone.Router.extend({
 	routes: {
 		'institucioneducativa': 'institucioneducativa',
 		'institucioneducativa/edit(/:id)': 'editinstitucioneducativa',
-		'cargo': 'cargoIndex'
+		'cargo': 'cargoIndex',
+		'cargo/edit(/:id)': 'editcargo',
 	},
 	institucioneducativa: function () {
 		var view = new InstitucionEducativaListView ({
@@ -58,5 +59,22 @@ var AdminRouter = Backbone.Router.extend({
 				view.collection.trigger('add');
 			}
 		});
+	},
+	editcargo: function (id) {
+		console.log(id);
+		// try to get catched model
+		var model = this.cargoCollection.get(id);
+		if (id == null) model = new CargoModel ();
+		if (typeof model == 'undefined') { // not cached
+			model = new InstitucionEducativaModel ({
+				idInstitucion: id
+			});
+		}
+		var view = new CargoFormView({
+			model: model,
+			collection: this.cargoCollection
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
+		if (id != null) view.model.fetch(); 
 	}
 });

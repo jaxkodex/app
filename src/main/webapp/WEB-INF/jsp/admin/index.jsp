@@ -120,7 +120,7 @@
 <script type="text/template" id="cargoItemList">
 <td><\%=cargoCodigo%></td>
 <td><\%=cargoDescripcion%></td>
-<td><input type="checkbox" value="<\%=cargoActivo%>" /></td>
+<td><input type="checkbox" <\% if (activo == true) { %>checked<\% }%> /></td>
 <td>
 	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
 	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-remove"></span></button>
@@ -138,7 +138,7 @@
 </div>
 <div class="checkbox">
 	<label>
-		<input type="checkbox" id="cargoActivo" value="<\%=cargoActivo%>" />
+		<input type="checkbox" id="cargoActivo" <\% if (activo == true) { %>checked<\% }%> />
 		Activo
 	</label>
 </div>
