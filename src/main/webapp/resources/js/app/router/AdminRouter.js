@@ -6,9 +6,10 @@ var app = app || {};
 
 var AdminRouter = Backbone.Router.extend({
 	initialize: function () {
-		this.institucionCollection = new InstitucionEducativaCollection()
-		this.cargoCollection = new CargoCollection();
-		this.periodoAcademicoCollection = new PeriodoAcademicoCollection();
+		this.institucionCollection = new InstitucionEducativaCollection;
+		this.cargoCollection = new CargoCollection;
+		this.periodoAcademicoCollection = new PeriodoAcademicoCollection;
+		this.nivelCollection = new NivelCollection;
 	},
 	routes: {
 		'institucioneducativa': 'institucioneducativa',
@@ -16,7 +17,8 @@ var AdminRouter = Backbone.Router.extend({
 		'cargo': 'cargoIndex',
 		'cargo/edit(/:id)': 'editcargo',
 		'periodoacademico(/)': 'periodoacademicoIndex',
-		'periodoacademico/edit(/:id)': 'editperiodoacademico'
+		'periodoacademico/edit(/:id)': 'editperiodoacademico',
+		'estructuraie(/)': 'estructuraieIndex'
 	},
 	institucioneducativa: function () {
 		var view = new InstitucionEducativaListView ({
@@ -110,5 +112,18 @@ var AdminRouter = Backbone.Router.extend({
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
 		if (id != null) view.model.fetch();
+	},
+	estructuraieIndex: function () {
+		var view = new EstructuraInstitucionEducativaView({
+			collection: this.nivelCollection,
+			router: this
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.$el);
+		view.collection.fetch({
+			silent: true, 
+			success: function () {
+				view.collection.trigger('add');
+			}
+		});
 	}
 });

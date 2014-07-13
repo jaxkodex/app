@@ -30,6 +30,7 @@
 				<li><a href="#institucioneducativa">Institucion Educación</a></li>
 				<li><a href="#cargo">Cargo</a></li>
 				<li><a href="#periodoacademico">Periodo Academico</a></li>
+				<li><a href="#estructuraie">Estructura IE</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -173,6 +174,26 @@
 <input type="submit" class="btn btn-default" value="Guardar" />
 </from>
 </script>
+<script type="text/template" id="estructuraInstitucionEducativa">
+<ul class="tree list-unstyled"><!--Main-->
+</ul>
+</script>
+<script type="text/template" id="estructuraInstitucionEducativaNivel">
+<\%=nivelNombre%>
+<ul>
+<\% _.each(grados, function (val) { %>
+<li><\%=val.gradoNombre%>
+<ul>
+<\% _.each(val.seccions, function (v) { %>
+<li><\%=val.gradoNombre%> <\%=v.seccionNombre%></li>
+<\% }); %>
+</ul>
+</li>
+<\% }); %>
+</ul>
+</script>
+<script type="text/template" id="estructuraInstitucionEducativaGrado">
+</script>
 <script type="text/template" id="asignacionDocenteList">
 <form class="form-inline">
 	<div class="form-group">
@@ -205,16 +226,19 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/InstitucionEducativaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/CargoModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PeriodoAcademicoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/NivelModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/CargoCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PeriodoAcademicoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/NivelCollection.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/CargoView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/PeriodoAcademicoView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/EstructuraInstitucionEducativaView.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
