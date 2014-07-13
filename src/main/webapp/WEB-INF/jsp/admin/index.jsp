@@ -105,6 +105,7 @@
 </td>
 </script>
 <script type="text/template" id="cargoList">
+<a class="btn btn-default btn-sm pull-right" href="#cargo/edit"><span class="glyphicon glyphicon-plus"></span></a>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -122,8 +123,8 @@
 <td><\%=cargoDescripcion%></td>
 <td><input type="checkbox" <\% if (activo == true) { %>checked<\% }%> /></td>
 <td>
-	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+	<button class="btn btn-sm btn-default edit"><span class="glyphicon glyphicon-pencil"></span></button>
+	<button class="btn btn-sm btn-default delete"><span class="glyphicon glyphicon-remove"></span></button>
 </td>
 </script>
 <script type="text/template" id="cargoForm">

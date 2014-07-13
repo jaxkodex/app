@@ -38,8 +38,6 @@ var AdminRouter = Backbone.Router.extend({
 				idInstitucion: id
 			});
 		}
-		console.log(model);
-		console.log(model.toJSON());
 		var view = new InstitucionEducativaFormView ({
 			model: model,
 			router: this
@@ -50,7 +48,8 @@ var AdminRouter = Backbone.Router.extend({
 	},
 	cargoIndex: function () {
 		var view = new CargoListView({
-			collection: this.cargoCollection
+			collection: this.cargoCollection,
+			router: this
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.$el);
 		view.collection.fetch({
@@ -66,13 +65,15 @@ var AdminRouter = Backbone.Router.extend({
 		var model = this.cargoCollection.get(id);
 		if (id == null) model = new CargoModel ();
 		if (typeof model == 'undefined') { // not cached
-			model = new InstitucionEducativaModel ({
-				idInstitucion: id
+			model = new CargoModel ({
+				idCargo: id
 			});
+			this.cargoCollection.add(model);
 		}
 		var view = new CargoFormView({
 			model: model,
-			collection: this.cargoCollection
+			collection: this.cargoCollection,
+			router: this
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
 		if (id != null) view.model.fetch(); 
