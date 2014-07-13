@@ -8,12 +8,15 @@ var AdminRouter = Backbone.Router.extend({
 	initialize: function () {
 		this.institucionCollection = new InstitucionEducativaCollection()
 		this.cargoCollection = new CargoCollection();
+		this.periodoAcademicoCollection = new PeriodoAcademicoCollection();
 	},
 	routes: {
 		'institucioneducativa': 'institucioneducativa',
 		'institucioneducativa/edit(/:id)': 'editinstitucioneducativa',
 		'cargo': 'cargoIndex',
 		'cargo/edit(/:id)': 'editcargo',
+		'periodoacademico(/)': 'periodoacademicoIndex',
+		'periodoacademico/edit(/:id)': 'editperiodoacademico'
 	},
 	institucioneducativa: function () {
 		var view = new InstitucionEducativaListView ({
@@ -30,7 +33,7 @@ var AdminRouter = Backbone.Router.extend({
 		});
 	},
 	editinstitucioneducativa: function (id) {
-		// try to get catched model
+		// try to get cached model
 		var model = this.institucionCollection.get(id);
 		if (id == null) model = new InstitucionEducativaModel ();
 		if (typeof model == 'undefined') { // not cached
@@ -60,8 +63,7 @@ var AdminRouter = Backbone.Router.extend({
 		});
 	},
 	editcargo: function (id) {
-		console.log(id);
-		// try to get catched model
+		// try to get cached model
 		var model = this.cargoCollection.get(id);
 		if (id == null) model = new CargoModel ();
 		if (typeof model == 'undefined') { // not cached
@@ -77,5 +79,36 @@ var AdminRouter = Backbone.Router.extend({
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
 		if (id != null) view.model.fetch(); 
+	},
+	periodoacademicoIndex: function () {
+		var view = new PeriodoAcademicoListView({
+			collection: this.periodoAcademicoCollection,
+			router: this
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.$el);
+		view.collection.fetch({
+			silent: true, 
+			success: function () {
+				view.collection.trigger('add');
+			}
+		});
+	},
+	editperiodoacademico: function (id) {
+		// try to get cached model
+		var model = this.periodoAcademicoCollection.get(id);
+		if (id == null) model = new PeriodoAcademicoModel ();
+		if (typeof model == 'undefined') { // not cached
+			model = new PeriodoAcademicoModel ({
+				idCargo: id
+			});
+			this.periodoAcademicoCollection.add(model);
+		}
+		var view = new PeriodoAcademicoFormView({
+			model: model,
+			collection: this.periodoAcademicoCollection,
+			router: this
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
+		if (id != null) view.model.fetch();
 	}
 });

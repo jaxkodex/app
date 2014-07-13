@@ -29,6 +29,7 @@
 			<ul>
 				<li><a href="#institucioneducativa">Institucion Educación</a></li>
 				<li><a href="#cargo">Cargo</a></li>
+				<li><a href="#periodoacademico">Periodo Academico</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -81,6 +82,7 @@
 </from>
 </script>
 <script type="text/template" id="periodoAcademicoList">
+<a class="btn btn-default btn-sm pull-right" href="#periodoacademico/edit"><span class="glyphicon glyphicon-plus"></span></a>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -96,13 +98,37 @@
 </script>
 <script type="text/template" id="periodoAcademicoItemList">
 <td><\%=periodoNombre%></td>
-<td><\%=periodoFinicio%></td>
-<td><\%=periodoFfin%></td>
-<td><input type="checkbox" value="<\%=periodoActivo%>" /></td>
+<td><\%=new Date(periodoFinicio).toString('dd/MM/yyyy')%></td>
+<td><\%=new Date(periodoFfin).toString('dd/MM/yyyy')%></td>
+<td><input type="checkbox" <\% if (periodoActivo == true) { %>checked<\% }%> /></td>
 <td>
-	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-	<button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+	<button class="btn btn-sm btn-default edit"><span class="glyphicon glyphicon-pencil"></span></button>
+	<button class="btn btn-sm btn-default delete"><span class="glyphicon glyphicon-remove"></span></button>
 </td>
+</script>
+<script type="text/template" id="periodoAcademicoForm">
+<form>
+<div class="form-group">
+	<label for="periodoNombre">Periodo:</label>
+	<input type="text" class="form-control" id="periodoNombre" value="<\%=periodoNombre%>" />
+</div>
+<div class="form-group">
+	<label for="periodoFinicio">Desde:</label>
+	<input type="text" class="form-control" id="periodoFinicio" value="<\%=new Date(periodoFinicio).toString('dd/MM/yyyy')%>" />
+</div>
+<div class="form-group">
+	<label for="periodoFfin">Hasta:</label>
+	<input type="text" class="form-control" id="periodoFfin" value="<\%=new Date(periodoFfin).toString('dd/MM/yyyy')%>" />
+</div>
+<div class="checkbox">
+	<label>
+		<input type="checkbox" id="periodoActivo" <\% if (periodoActivo == true) { %>checked<\% }%> />
+		Activo
+	</label>
+</div>
+<input type="button" class="btn btn-default cancel" value="Cancelar" />
+<input type="submit" class="btn btn-default" value="Guardar" />
+</from>
 </script>
 <script type="text/template" id="cargoList">
 <a class="btn btn-default btn-sm pull-right" href="#cargo/edit"><span class="glyphicon glyphicon-plus"></span></a>
@@ -173,18 +199,22 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PersonaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/InstitucionEducativaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/CargoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PeriodoAcademicoModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/CargoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PeriodoAcademicoCollection.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/CargoView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/PeriodoAcademicoView.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
