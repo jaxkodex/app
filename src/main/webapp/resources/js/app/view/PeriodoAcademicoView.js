@@ -1,5 +1,6 @@
-
-
+/**
+ * 
+ */
 
 var PeriodoAcademicoListView = Backbone.View.extend({
 	initialize: function (options) {
