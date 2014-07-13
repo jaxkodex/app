@@ -27,7 +27,7 @@
 	<ul class="list-unstyled">
 		<li>Administración
 			<ul>
-				<li><a href="#institucioneducativa">Institucion Educación</a></li>
+				<li><a href="#institucioneducativa">Institucion Educativa</a></li>
 				<li><a href="#cargo">Cargo</a></li>
 				<li><a href="#periodoacademico">Periodo Academico</a></li>
 				<li><a href="#estructuraie">Estructura IE</a></li>
