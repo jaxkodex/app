@@ -36,6 +36,5 @@ $(function () {
 	app.workspace = new WorkspaceView ();
 	app.workspace.render();
 	new WorkspaceRouter;
-	new AdminRouter;
 	Backbone.history.start();
 });

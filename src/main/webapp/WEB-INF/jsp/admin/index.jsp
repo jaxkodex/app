@@ -16,6 +16,25 @@
 </head>
 <body>
 
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}">Educando</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar">
+			 <ul class="nav navbar-nav">
+			 	<li class="active"><a href="${pageContext.request.contextPath}/admin">Administración</a></li>
+			 </ul>
+		</div>
+	</div>
+</div>
+
 <div class="container-fluid">
 	<div id="workspace" class="row"></div>
 </div>
@@ -36,7 +55,6 @@
 	</ul>
 </div>
 <div class="col-sm-10"></div>
-<!--div></div-->
 </script>
 <script type="text/template" id="institucionEducativaList">
 <div class="col-sm-12"><button class="btn btn-sm btn-primary pull-right new"><span class="glyphicon glyphicon-plus"></span></button></div>
@@ -242,7 +260,8 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/EvaluacionDocenteRouter.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/main.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mainAdmin.js"></script>
 </body>
 </html>

@@ -1,10 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="resources/css/styles.css">
+	<meta charset="utf-8">
+	<title>Administración</title>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
+	
+	<script type="text/javascript">
+		baseUrl = '${pageContext.request.contextPath}';
+	</script>
 </head>
 <body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}">Educando</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navbar">
+			 <ul class="nav navbar-nav">
+			 	<li><a href="${pageContext.request.contextPath}/admin">Administración</a></li>
+			 </ul>
+		</div>
+	</div>
+</div>
 <!-- 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -23,21 +48,28 @@
 			<h2>Bienvenido!</h2>
 		</div>
 	</div> -->
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/underscore.js"></script>
-	<script type="text/javascript" src="resources/js/backbone.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.js"></script>
-	<script type="text/javascript" src="resources/js/app/model/Persona.js"></script>
-	<script type="text/javascript" src="resources/js/app/model/InstitucionEducativaModel.js"></script>
-	<script type="text/javascript" src="resources/js/app/collection/PersonaCollection.js"></script>
-	<script type="text/javascript" src="resources/js/app/collection/InstitucionEducativaCollection.js"></script>
-	<script type="text/javascript" src="resources/js/app/view/workspace_view.js"></script>
-	<script type="text/javascript" src="resources/js/app/view/config_view.js"></script>
-	<script type="text/javascript" src="resources/js/app/view/config_persona_view.js"></script>
-	<script type="text/javascript" src="resources/js/app/view/InstitucionEducativaView.js"></script>
-	<script type="text/javascript" src="resources/js/app/router/workspace.js"></script>
-	<script type="text/javascript" src="resources/js/app/router/evaluaciones.js"></script>
-	<script type="text/javascript" src="resources/js/app/router/configuraciones.js"></script>
-	<script type="text/javascript" src="resources/js/app/main.js"></script>
+
+<div class="container-fluid">
+	<div id="workspace" class="row"></div>
+</div>
+
+<!-- Templates -->
+
+<script type="text/template" id="workspaceTemplate">
+<div class="col-sm-12"></div>
+</script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
+	
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/main.js"></script>
 </body>
 </html>
