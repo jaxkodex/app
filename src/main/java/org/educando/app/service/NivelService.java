@@ -8,4 +8,7 @@ public interface NivelService {
 	
 	public List<Nivel> listAll ();
 
+	public Nivel create(Nivel nivel);
+	public Nivel update(Nivel nivel);
+
 }

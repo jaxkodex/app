@@ -193,13 +193,15 @@
 </from>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativa">
-<select name=""></select>
+<div class="col-sm-12">
 <button class="btn btn-default btn-sm pull-right addnivel"><span class="glyphicon glyphicon-plus"></span> Agregar nivel</button>
+<div class="col-sm-2 pull-left"><select class="form-control input-sm" name="intitucion_educativa"></select></div>
+</div>
 <ul class="tree list-unstyled"><!--Main-->
 </ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaNivel">
-<\%=nivelNombre%>
+<span class="desc"><\%=nivelNombre%></span><button class="btn btn-sm btn-link editbtn"><span class="glyphicon glyphicon-pencil"></span></button><input type="text" value="<\%=nivelNombre%>" class="form-control input-sm">
 <ul>
 <\% _.each(grados, function (val) { %>
 <li><\%=val.gradoNombre%>

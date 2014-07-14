@@ -7,3 +7,12 @@ body {
 .navbar-default {
 	background: #fff;
 }
+
+.estructuraie-nivel {}
+.estructuraie-nivel > input, .estructuraie-nivel.edit > .editbtn, 
+.estructuraie-nivel.edit > .desc {
+	display: none
+}
+.estructuraie-nivel.edit > input {
+	display: block
+}

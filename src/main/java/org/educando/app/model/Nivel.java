@@ -19,6 +19,7 @@ public class Nivel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_nivel")
 	private int idNivel;
 
@@ -30,7 +31,6 @@ public class Nivel implements Serializable {
 	private List<Grado> grados;
 
 	//bi-directional many-to-one association to InstitucionEducativa
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_institucion")
 	private InstitucionEducativa institucionEducativa;
@@ -76,6 +76,7 @@ public class Nivel implements Serializable {
 		return grado;
 	}
 
+//	@JsonIgnore
 	public InstitucionEducativa getInstitucionEducativa() {
 		return this.institucionEducativa;
 	}

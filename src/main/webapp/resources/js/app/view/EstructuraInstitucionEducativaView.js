@@ -30,7 +30,8 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		'click .addnivel': 'addNivel'
 	},
 	render: function () {
-		var me = this, container = document.createDocumentFragment();
+		var me = this, container = document.createDocumentFragment(), 
+		selectContainer = document.createDocumentFragment();
 		this.$el.html(this.template());
 		this.collection.each(function (val) {
 			var view = new EstructuraInstitucionEducativaNivelView({
@@ -40,10 +41,22 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 			container.appendChild(view.render().el);
 		});
 		me.$el.find('ul').append(container);
+
+		this.institucionCollection.each(function (val) {
+			var view = new me.InstitucionEducativaSelectOptionView({
+				model: val
+			});
+			selectContainer.appendChild(view.render().el);
+		});
+		me.$el.find('select').append(selectContainer);
 		return this;
 	},
 	addNivel: function (evt) {
 		evt.preventDefault();
+		this.collection.create({
+			institucionEducativa: { idInstitucion: this.$el.find('select').val() },
+			nivelNombre: 'Nuevo nivel'
+		});
 	}
 });
 
@@ -57,8 +70,11 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 		this.listenTo(this.model, 'change', this.render);
 	},
 	tagName: 'li',
+	className: 'estructuraie-nivel',
 	template: _.template($('#estructuraInstitucionEducativaNivel').html()),
 	events: {
+		'click .editbtn': 'edit',
+		'blur input': 'update'
 		//'click input[type=checkbox]': 'toggleActive',
 		//'click .delete': 'destroy',
 		//'click .edit': 'edit'
@@ -69,8 +85,16 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	},
 	edit: function (evt) {
 		evt.preventDefault();
-		this.router.navigate('cargo/edit/'+this.model.id, {trigger: true});
-	}, 
+		this.$el.addClass('edit');
+		this.$el.find('input').focus();
+		//this.router.navigate('cargo/edit/'+this.model.id, {trigger: true});
+	},
+	update: function (evt) {
+		this.model.save({
+			nivelNombre: this.$('input').val()
+		});
+		this.$el.removeClass('edit');
+	},
 	destroy: function (evt) {
 		evt.preventDefault();
 		this.model.destroy();

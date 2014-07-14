@@ -18,4 +18,14 @@ public class NivelServiceImpl implements NivelService {
 		return nivelRepository.findAll();
 	}
 
+	@Override
+	public Nivel create(Nivel nivel) {
+		return nivelRepository.save(nivel);
+	}
+
+	@Override
+	public Nivel update(Nivel nivel) {
+		return nivelRepository.save(nivel);
+	}
+
 }
