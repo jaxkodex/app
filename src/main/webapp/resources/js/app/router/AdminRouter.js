@@ -116,13 +116,20 @@ var AdminRouter = Backbone.Router.extend({
 	estructuraieIndex: function () {
 		var view = new EstructuraInstitucionEducativaView({
 			collection: this.nivelCollection,
-			router: this
+			router: this,
+			institucionCollection: this.institucionCollection
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.$el);
 		view.collection.fetch({
 			silent: true, 
 			success: function () {
 				view.collection.trigger('add');
+			}
+		});
+		view.institucionCollection.fetch({
+			silent: true, 
+			success: function () {
+				view.institucionCollection.trigger('add');
 			}
 		});
 	}

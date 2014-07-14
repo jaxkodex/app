@@ -193,6 +193,8 @@
 </from>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativa">
+<select name=""></select>
+<button class="btn btn-default btn-sm pull-right addnivel"><span class="glyphicon glyphicon-plus"></span> Agregar nivel</button>
 <ul class="tree list-unstyled"><!--Main-->
 </ul>
 </script>

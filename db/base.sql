@@ -7,14 +7,14 @@ delete from periodo_academico;
 delete from turno;
 
 -- preload turno
-insert into turno values (1, 'MAÑANA', 'M');
+insert into turno values (1, 'MAï¿½ANA', 'M');
 insert into turno values (2, 'TARDE', 'T');
 
 -- preload periodo_academico
 insert into periodo_academico values (1, '2014-01-01', '2014-12-31', '2014', true);
 
 -- preload institucion_educativa
-insert into institucion_educativa values (1, 'Santa Rosa del Sauce', '¡Educando Contigo!', true);
+insert into institucion_educativa values (1, 'Santa Rosa del Sauce', 'ï¿½Educando Contigo!', true);
 
 --- preload nivel
 insert into nivel values (1, 1, 'INICIAL');
@@ -23,8 +23,8 @@ insert into nivel values (3, 1, 'SECUNDARIA');
 
 -- preload grado
 -- Inicial
-insert into grado values (1, 1, '4 Años');
-insert into grado values (2, 1, '5 Años');
+insert into grado values (1, 1, '4 Aï¿½os');
+insert into grado values (2, 1, '5 Aï¿½os');
 -- Primaria
 insert into grado values (3, 2, 'PRIMERO');
 insert into grado values (4, 2, 'SEGUNDO');

@@ -8,12 +8,27 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		if (typeof options.router != 'undefined') {
 			this.router = options.router;
 		}
+		if (typeof options.institucionCollection != 'undefined') {
+			this.institucionCollection = options.institucionCollection;
+		}
 
 		this.listenTo(this.collection, 'reset add remove', this.render);
+		this.listenTo(this.institucionCollection, 'reset add remove', this.render);
+		this.InstitucionEducativaSelectOptionView = Backbone.View.extend({
+			tagName: 'option',
+			template: _.template('<%=institucionNombre%>'),
+			render: function () {
+				this.$el.html(this.template(this.model.toJSON())).val(this.model.get('idInstitucion'));
+				return this;
+			}
+		});
 	},
 	tagName: 'div',
 	className: 'col-sm-12',
 	template: _.template($('#estructuraInstitucionEducativa').html()),
+	events: {
+		'click .addnivel': 'addNivel'
+	},
 	render: function () {
 		var me = this, container = document.createDocumentFragment();
 		this.$el.html(this.template());
@@ -26,6 +41,9 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		});
 		me.$el.find('ul').append(container);
 		return this;
+	},
+	addNivel: function (evt) {
+		evt.preventDefault();
 	}
 });
 
