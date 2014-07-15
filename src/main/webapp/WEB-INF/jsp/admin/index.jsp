@@ -201,20 +201,17 @@
 </ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaNivel">
-<span class="desc"><\%=nivelNombre%></span><button class="btn btn-sm btn-link editbtn"><span class="glyphicon glyphicon-pencil"></span></button><input type="text" value="<\%=nivelNombre%>" class="form-control input-sm">
-<ul>
-<\% _.each(grados, function (val) { %>
-<li><\%=val.gradoNombre%>
-<ul>
-<\% _.each(val.seccions, function (v) { %>
-<li><\%=val.gradoNombre%> <\%=v.seccionNombre%></li>
-<\% }); %>
-</ul>
-</li>
-<\% }); %>
-</ul>
+<span class="desc"><\%=nivelNombre%></span>
+<button class="btn btn-link btn-xs editbtn"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-link addgradobtn"><span class="glyphicon glyphicon-plus"></span></button>
+<button class="btn btn-link removenivelbtn"><span class="glyphicon glyphicon-remove"></span></button>
+<input type="text" value="<\%=nivelNombre%>" class="form-control input-sm">
+<ul></ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaGrado">
+<\%=gradoNombre%>
+<input type="text" value="<\%=gradoNombre%>" class="form-control input-sm">
+<ul></ul>
 </script>
 <script type="text/template" id="asignacionDocenteList">
 <form class="form-inline">

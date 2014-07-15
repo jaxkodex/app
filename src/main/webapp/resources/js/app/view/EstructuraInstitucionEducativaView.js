@@ -67,6 +67,7 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 			this.router = options.router;
 		}
 		
+		
 		this.listenTo(this.model, 'change', this.render);
 	},
 	tagName: 'li',
@@ -74,10 +75,9 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	template: _.template($('#estructuraInstitucionEducativaNivel').html()),
 	events: {
 		'click .editbtn': 'edit',
-		'blur input': 'update'
-		//'click input[type=checkbox]': 'toggleActive',
-		//'click .delete': 'destroy',
-		//'click .edit': 'edit'
+		'blur input': 'update',
+		'click .addgradobtn': 'addGrado',
+		'click .removenivelbtn': 'destroy',
 	},
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
@@ -87,7 +87,6 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 		evt.preventDefault();
 		this.$el.addClass('edit');
 		this.$el.find('input').focus();
-		//this.router.navigate('cargo/edit/'+this.model.id, {trigger: true});
 	},
 	update: function (evt) {
 		this.model.save({
@@ -97,6 +96,10 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	},
 	destroy: function (evt) {
 		evt.preventDefault();
-		this.model.destroy();
+		//this.model.destroy();
+		console.log('Delete nivel');
+	},
+	addGrado: function (evt) {
+		evt.preventDefault();
 	}
 });

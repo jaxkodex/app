@@ -10,7 +10,8 @@ body {
 
 .estructuraie-nivel {}
 .estructuraie-nivel > input, .estructuraie-nivel.edit > .editbtn, 
-.estructuraie-nivel.edit > .desc {
+.estructuraie-nivel.edit > .desc, .estructuraie-nivel.edit > .addgradobtn, 
+.estructuraie-nivel.edit > .removenivelbtn {
 	display: none
 }
 .estructuraie-nivel.edit > input {
