@@ -201,15 +201,16 @@
 </ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaNivel">
-<span class="desc"><\%=nivelNombre%></span>
-<button class="btn btn-link btn-xs editbtn"><span class="glyphicon glyphicon-pencil"></span></button>
-<button class="btn btn-link addgradobtn"><span class="glyphicon glyphicon-plus"></span></button>
-<button class="btn btn-link removenivelbtn"><span class="glyphicon glyphicon-remove"></span></button>
+<span class="desc hidden_on_editing"><\%=nivelNombre%></span>
+<button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-link addgradobtn hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></button>
+<button class="btn btn-link removenivelbtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
 <input type="text" value="<\%=nivelNombre%>" class="form-control input-sm">
 <ul></ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaGrado">
-<\%=gradoNombre%>
+<span class="hidden_on_editing"><\%=gradoNombre%></span>
+<button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
 <input type="text" value="<\%=gradoNombre%>" class="form-control input-sm">
 <ul></ul>
 </script>

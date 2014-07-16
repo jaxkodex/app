@@ -10,6 +10,8 @@ var AdminRouter = Backbone.Router.extend({
 		this.cargoCollection = new CargoCollection;
 		this.periodoAcademicoCollection = new PeriodoAcademicoCollection;
 		this.nivelCollection = new NivelCollection;
+		this.gradoCollection = new GradoCollection;
+		this.seccionCollection = new SeccionCollection;
 	},
 	routes: {
 		'institucioneducativa': 'institucioneducativa',
@@ -117,7 +119,9 @@ var AdminRouter = Backbone.Router.extend({
 		var view = new EstructuraInstitucionEducativaView({
 			collection: this.nivelCollection,
 			router: this,
-			institucionCollection: this.institucionCollection
+			institucionCollection: this.institucionCollection,
+			gradoCollection: this.gradoCollection,
+			seccionCollection: this.seccionCollection
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.$el);
 		view.collection.fetch({
