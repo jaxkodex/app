@@ -28,4 +28,14 @@ public class NivelServiceImpl implements NivelService {
 		return nivelRepository.save(nivel);
 	}
 
+	@Override
+	public Nivel load(Integer id) {
+		return nivelRepository.findOne(id);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		nivelRepository.delete(id);
+	}
+
 }
