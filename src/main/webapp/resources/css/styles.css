@@ -13,7 +13,7 @@ body {
 .estructuraie-nivel.edit > .removenivelbtn,*/
 .estructuraie-nivel {}
 .estructuraie-nivel > input, 
-.estructuraie-nivel > .hidden_on_editing {
+.estructuraie-nivel.edit > .hidden_on_editing {
 	display: none
 }
 .estructuraie-nivel.edit > input {

@@ -66,8 +66,6 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 		if (typeof options.router != 'undefined') {
 			this.router = options.router;
 		}
-		
-		
 		this.listenTo(this.model, 'change', this.render);
 	},
 	tagName: 'li',
