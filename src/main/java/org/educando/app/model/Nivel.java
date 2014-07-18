@@ -27,6 +27,7 @@ public class Nivel implements Serializable {
 	private String nivelNombre;
 
 	//bi-directional many-to-one association to Grado
+	@JsonIgnore
 	@OneToMany(mappedBy="nivel", fetch=FetchType.EAGER)
 	private List<Grado> grados;
 

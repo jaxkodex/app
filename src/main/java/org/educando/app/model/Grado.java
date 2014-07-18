@@ -19,6 +19,7 @@ public class Grado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_grado")
 	private int idGrado;
 
@@ -26,12 +27,12 @@ public class Grado implements Serializable {
 	private String gradoNombre;
 
 	//bi-directional many-to-one association to Nivel
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_nivel")
 	private Nivel nivel;
 
 	//bi-directional many-to-one association to Seccion
+	@JsonIgnore
 	@OneToMany(mappedBy="grado", fetch=FetchType.EAGER)
 	private List<Seccion> seccions;
 
