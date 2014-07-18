@@ -11,6 +11,9 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		if (typeof options.institucionCollection != 'undefined') {
 			this.institucionCollection = options.institucionCollection;
 		}
+		if (typeof options.gradoCollection != 'undefined') {
+			this.gradoCollection = options.gradoCollection;
+		}
 
 		this.listenTo(this.collection, 'reset add remove', this.render);
 		this.listenTo(this.institucionCollection, 'reset add remove', this.render);
@@ -35,6 +38,7 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		this.$el.html(this.template());
 		this.collection.each(function (val) {
 			var view = new EstructuraInstitucionEducativaNivelView({
+				gradoCollection: this.gradoCollection,
 				model: val,
 				router: me.router
 			});
@@ -66,6 +70,9 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 		if (typeof options.router != 'undefined') {
 			this.router = options.router;
 		}
+		if (typeof options.gradoCollection != 'undefined') {
+			this.gradoCollection = options.gradoCollection;
+		}
 		this.listenTo(this.model, 'change', this.render);
 	},
 	tagName: 'li',
@@ -94,10 +101,11 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	},
 	destroy: function (evt) {
 		evt.preventDefault();
-		//this.model.destroy();
+		this.model.destroy();
 		console.log('Delete nivel');
 	},
 	addGrado: function (evt) {
 		evt.preventDefault();
+		this.gradoCollection.create({});
 	}
 });

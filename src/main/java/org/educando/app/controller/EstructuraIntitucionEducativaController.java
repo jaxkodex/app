@@ -1,6 +1,8 @@
 package org.educando.app.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.educando.app.model.Grado;
 import org.educando.app.model.Nivel;
@@ -36,6 +38,14 @@ public class EstructuraIntitucionEducativaController {
 	@RequestMapping(value="/nivel/{idNivel}", method=RequestMethod.PUT)
 	public @ResponseBody Nivel update (@RequestBody Nivel nivel, @PathVariable Integer idNivel) {
 		return nivelService.update(nivel);
+	}
+	
+	@RequestMapping(value="/nivel/{idNivel}", method=RequestMethod.DELETE)
+	public @ResponseBody Map<String, Object> apiDelete (@PathVariable Integer idNivel) {
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("success", true);
+		nivelService.delete(idNivel);
+		return m;
 	}
 	
 	@RequestMapping(value="/grado", method=RequestMethod.GET)

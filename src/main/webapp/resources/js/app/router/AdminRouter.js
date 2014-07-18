@@ -116,6 +116,7 @@ var AdminRouter = Backbone.Router.extend({
 		if (id != null) view.model.fetch();
 	},
 	estructuraieIndex: function () {
+		console.log(this.gradoCollection);
 		var view = new EstructuraInstitucionEducativaView({
 			collection: this.nivelCollection,
 			router: this,
