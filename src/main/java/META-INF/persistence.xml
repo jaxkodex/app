@@ -20,5 +20,7 @@
 		<class>org.educando.app.model.Seccion</class>
 		<class>org.educando.app.model.SeccionEvaluacion</class>
 		<class>org.educando.app.model.Turno</class>
+		<class>org.educando.app.model.Area</class>
+		<class>org.educando.app.model.AreaPK</class>
 	</persistence-unit>
 </persistence>
