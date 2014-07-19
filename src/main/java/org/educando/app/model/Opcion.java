@@ -37,7 +37,11 @@ public class Opcion implements Serializable {
 			@JoinColumn(name="id_resultado")
 			}
 		)
-	private List<Resultado> resultados;
+	private List<Resultado> resultados1;
+
+	//bi-directional many-to-many association to Resultado
+	@ManyToMany(mappedBy="opcions2")
+	private List<Resultado> resultados2;
 
 	public Opcion() {
 	}
@@ -66,12 +70,20 @@ public class Opcion implements Serializable {
 		this.criterio = criterio;
 	}
 
-	public List<Resultado> getResultados() {
-		return this.resultados;
+	public List<Resultado> getResultados1() {
+		return this.resultados1;
 	}
 
-	public void setResultados(List<Resultado> resultados) {
-		this.resultados = resultados;
+	public void setResultados1(List<Resultado> resultados1) {
+		this.resultados1 = resultados1;
+	}
+
+	public List<Resultado> getResultados2() {
+		return this.resultados2;
+	}
+
+	public void setResultados2(List<Resultado> resultados2) {
+		this.resultados2 = resultados2;
 	}
 
 }

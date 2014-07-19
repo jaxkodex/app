@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -29,7 +25,6 @@ public class Turno implements Serializable {
 	private String turnoNombre;
 
 	//bi-directional many-to-one association to Clase
-	@JsonIgnore
 	@OneToMany(mappedBy="turno")
 	private List<Clase> clases;
 

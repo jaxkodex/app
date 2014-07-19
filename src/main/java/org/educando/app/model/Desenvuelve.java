@@ -17,6 +17,10 @@ public class Desenvuelve implements Serializable {
 	@EmbeddedId
 	private DesenvuelvePK id;
 
+	//bi-directional many-to-one association to ACargo
+	@OneToMany(mappedBy="desenvuelve")
+	private List<ACargo> ACargos;
+
 	//bi-directional many-to-many association to Clase
 	@ManyToMany
 	@JoinTable(
@@ -44,6 +48,28 @@ public class Desenvuelve implements Serializable {
 
 	public void setId(DesenvuelvePK id) {
 		this.id = id;
+	}
+
+	public List<ACargo> getACargos() {
+		return this.ACargos;
+	}
+
+	public void setACargos(List<ACargo> ACargos) {
+		this.ACargos = ACargos;
+	}
+
+	public ACargo addACargo(ACargo ACargo) {
+		getACargos().add(ACargo);
+		ACargo.setDesenvuelve(this);
+
+		return ACargo;
+	}
+
+	public ACargo removeACargo(ACargo ACargo) {
+		getACargos().remove(ACargo);
+		ACargo.setDesenvuelve(null);
+
+		return ACargo;
 	}
 
 	public List<Clase> getClases() {

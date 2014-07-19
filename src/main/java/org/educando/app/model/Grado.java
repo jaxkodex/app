@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -19,12 +15,15 @@ public class Grado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	@Column(name="id_grado")
 	private int idGrado;
 
 	@Column(name="grado_nombre")
 	private String gradoNombre;
+
+	//bi-directional many-to-one association to Area
+	@OneToMany(mappedBy="grado")
+	private List<Area> areas;
 
 	//bi-directional many-to-one association to Nivel
 	@ManyToOne
@@ -32,8 +31,7 @@ public class Grado implements Serializable {
 	private Nivel nivel;
 
 	//bi-directional many-to-one association to Seccion
-	@JsonIgnore
-	@OneToMany(mappedBy="grado", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="grado")
 	private List<Seccion> seccions;
 
 	public Grado() {
@@ -53,6 +51,28 @@ public class Grado implements Serializable {
 
 	public void setGradoNombre(String gradoNombre) {
 		this.gradoNombre = gradoNombre;
+	}
+
+	public List<Area> getAreas() {
+		return this.areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	public Area addArea(Area area) {
+		getAreas().add(area);
+		area.setGrado(this);
+
+		return area;
+	}
+
+	public Area removeArea(Area area) {
+		getAreas().remove(area);
+		area.setGrado(null);
+
+		return area;
 	}
 
 	public Nivel getNivel() {

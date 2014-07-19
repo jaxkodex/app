@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -21,7 +17,6 @@ public class InstitucionEducativa implements Serializable {
 
 	@Id
 	@Column(name="id_institucion")
-	@GeneratedValue
 	private int idInstitucion;
 
 	@Column(name="institucion_activo")
@@ -34,7 +29,6 @@ public class InstitucionEducativa implements Serializable {
 	private String institucionNombre;
 
 	//bi-directional many-to-one association to Nivel
-	@JsonIgnore
 	@OneToMany(mappedBy="institucionEducativa")
 	private List<Nivel> nivels;
 

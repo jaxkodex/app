@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Date;
 import java.util.List;
 
@@ -43,31 +39,30 @@ public class Clase implements Serializable {
 	@Column(name="clase_nmujeres")
 	private int claseNmujeres;
 
-	//bi-directional many-to-many association to Desenvuelve
-	@JsonIgnore
-	@ManyToMany(mappedBy="clases")
-	private List<Desenvuelve> desenvuelves;
+	//bi-directional many-to-one association to ACargo
+	@OneToMany(mappedBy="clase")
+	private List<ACargo> ACargos;
 
 	//bi-directional many-to-one association to PeriodoAcademico
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_periodo")
 	private PeriodoAcademico periodoAcademico;
 
 	//bi-directional many-to-one association to Seccion
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_seccion")
 	private Seccion seccion;
 
 	//bi-directional many-to-one association to Turno
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_turno")
 	private Turno turno;
 
+	//bi-directional many-to-many association to Desenvuelve
+	@ManyToMany(mappedBy="clases")
+	private List<Desenvuelve> desenvuelves;
+
 	//bi-directional many-to-one association to Evaluacion
-	@JsonIgnore
 	@OneToMany(mappedBy="clase")
 	private List<Evaluacion> evaluacions;
 
@@ -130,12 +125,26 @@ public class Clase implements Serializable {
 		this.claseNmujeres = claseNmujeres;
 	}
 
-	public List<Desenvuelve> getDesenvuelves() {
-		return this.desenvuelves;
+	public List<ACargo> getACargos() {
+		return this.ACargos;
 	}
 
-	public void setDesenvuelves(List<Desenvuelve> desenvuelves) {
-		this.desenvuelves = desenvuelves;
+	public void setACargos(List<ACargo> ACargos) {
+		this.ACargos = ACargos;
+	}
+
+	public ACargo addACargo(ACargo ACargo) {
+		getACargos().add(ACargo);
+		ACargo.setClase(this);
+
+		return ACargo;
+	}
+
+	public ACargo removeACargo(ACargo ACargo) {
+		getACargos().remove(ACargo);
+		ACargo.setClase(null);
+
+		return ACargo;
 	}
 
 	public PeriodoAcademico getPeriodoAcademico() {
@@ -160,6 +169,14 @@ public class Clase implements Serializable {
 
 	public void setTurno(Turno turno) {
 		this.turno = turno;
+	}
+
+	public List<Desenvuelve> getDesenvuelves() {
+		return this.desenvuelves;
+	}
+
+	public void setDesenvuelves(List<Desenvuelve> desenvuelves) {
+		this.desenvuelves = desenvuelves;
 	}
 
 	public List<Evaluacion> getEvaluacions() {

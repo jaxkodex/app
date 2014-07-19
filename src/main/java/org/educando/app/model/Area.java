@@ -2,6 +2,7 @@ package org.educando.app.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -13,26 +14,30 @@ import javax.persistence.*;
 public class Area implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private AreaPK id;
+	@Id
+	@Column(name="id_area")
+	private int idArea;
 
 	@Column(name="area_descripcion")
 	private String areaDescripcion;
 
+	//bi-directional many-to-one association to ACargo
+	@OneToMany(mappedBy="area")
+	private List<ACargo> ACargos;
+
 	//bi-directional many-to-one association to Grado
 	@ManyToOne
-	@JoinColumn(name="id_grado")
 	private Grado grado;
 
 	public Area() {
 	}
 
-	public AreaPK getId() {
-		return this.id;
+	public int getIdArea() {
+		return this.idArea;
 	}
 
-	public void setId(AreaPK id) {
-		this.id = id;
+	public void setIdArea(int idArea) {
+		this.idArea = idArea;
 	}
 
 	public String getAreaDescripcion() {
@@ -41,6 +46,28 @@ public class Area implements Serializable {
 
 	public void setAreaDescripcion(String areaDescripcion) {
 		this.areaDescripcion = areaDescripcion;
+	}
+
+	public List<ACargo> getACargos() {
+		return this.ACargos;
+	}
+
+	public void setACargos(List<ACargo> ACargos) {
+		this.ACargos = ACargos;
+	}
+
+	public ACargo addACargo(ACargo ACargo) {
+		getACargos().add(ACargo);
+		ACargo.setArea(this);
+
+		return ACargo;
+	}
+
+	public ACargo removeACargo(ACargo ACargo) {
+		getACargos().remove(ACargo);
+		ACargo.setArea(null);
+
+		return ACargo;
 	}
 
 	public Grado getGrado() {

@@ -21,19 +21,32 @@ public class Resultado implements Serializable {
 	@Column(name="resultado_valor")
 	private int resultadoValor;
 
-	//bi-directional many-to-one association to Evaluacion
-	@ManyToOne
-	@JoinColumn(name="id_evaluacion")
-	private Evaluacion evaluacion;
+	//bi-directional many-to-many association to Opcion
+	@ManyToMany(mappedBy="resultados1")
+	private List<Opcion> opcions1;
 
 	//bi-directional many-to-one association to Criterio
 	@ManyToOne
 	@JoinColumn(name="id_criterio")
 	private Criterio criterio;
 
+	//bi-directional many-to-one association to Evaluacion
+	@ManyToOne
+	@JoinColumn(name="id_evaluacion")
+	private Evaluacion evaluacion;
+
 	//bi-directional many-to-many association to Opcion
-	@ManyToMany(mappedBy="resultados")
-	private List<Opcion> opcions;
+	@ManyToMany
+	@JoinTable(
+		name="resultado_has_opcion"
+		, joinColumns={
+			@JoinColumn(name="id_resultado")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_opcion")
+			}
+		)
+	private List<Opcion> opcions2;
 
 	public Resultado() {
 	}
@@ -54,12 +67,12 @@ public class Resultado implements Serializable {
 		this.resultadoValor = resultadoValor;
 	}
 
-	public Evaluacion getEvaluacion() {
-		return this.evaluacion;
+	public List<Opcion> getOpcions1() {
+		return this.opcions1;
 	}
 
-	public void setEvaluacion(Evaluacion evaluacion) {
-		this.evaluacion = evaluacion;
+	public void setOpcions1(List<Opcion> opcions1) {
+		this.opcions1 = opcions1;
 	}
 
 	public Criterio getCriterio() {
@@ -70,12 +83,20 @@ public class Resultado implements Serializable {
 		this.criterio = criterio;
 	}
 
-	public List<Opcion> getOpcions() {
-		return this.opcions;
+	public Evaluacion getEvaluacion() {
+		return this.evaluacion;
 	}
 
-	public void setOpcions(List<Opcion> opcions) {
-		this.opcions = opcions;
+	public void setEvaluacion(Evaluacion evaluacion) {
+		this.evaluacion = evaluacion;
+	}
+
+	public List<Opcion> getOpcions2() {
+		return this.opcions2;
+	}
+
+	public void setOpcions2(List<Opcion> opcions2) {
+		this.opcions2 = opcions2;
 	}
 
 }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="app">
+		<class>org.educando.app.model.ACargo</class>
+		<class>org.educando.app.model.ACargoPK</class>
+		<class>org.educando.app.model.Area</class>
 		<class>org.educando.app.model.Cargo</class>
 		<class>org.educando.app.model.Clase</class>
 		<class>org.educando.app.model.Conclusion</class>
@@ -20,7 +23,5 @@
 		<class>org.educando.app.model.Seccion</class>
 		<class>org.educando.app.model.SeccionEvaluacion</class>
 		<class>org.educando.app.model.Turno</class>
-		<class>org.educando.app.model.Area</class>
-		<class>org.educando.app.model.AreaPK</class>
 	</persistence-unit>
 </persistence>

@@ -40,10 +40,10 @@ public class Evaluacion implements Serializable {
 	@OneToMany(mappedBy="evaluacion")
 	private List<Conclusion> conclusions;
 
-	//bi-directional many-to-one association to FormatoEvaluacion
+	//bi-directional many-to-one association to Clase
 	@ManyToOne
-	@JoinColumn(name="id_formato")
-	private FormatoEvaluacion formatoEvaluacion;
+	@JoinColumn(name="id_clase")
+	private Clase clase;
 
 	//bi-directional many-to-one association to Desenvuelve
 	@ManyToOne
@@ -53,15 +53,15 @@ public class Evaluacion implements Serializable {
 		})
 	private Desenvuelve desenvuelve;
 
+	//bi-directional many-to-one association to FormatoEvaluacion
+	@ManyToOne
+	@JoinColumn(name="id_formato")
+	private FormatoEvaluacion formatoEvaluacion;
+
 	//bi-directional many-to-one association to Observador
 	@ManyToOne
 	@JoinColumn(name="id_observador")
 	private Observador observador;
-
-	//bi-directional many-to-one association to Clase
-	@ManyToOne
-	@JoinColumn(name="id_clase")
-	private Clase clase;
 
 	//bi-directional many-to-one association to Resultado
 	@OneToMany(mappedBy="evaluacion")
@@ -148,12 +148,12 @@ public class Evaluacion implements Serializable {
 		return conclusion;
 	}
 
-	public FormatoEvaluacion getFormatoEvaluacion() {
-		return this.formatoEvaluacion;
+	public Clase getClase() {
+		return this.clase;
 	}
 
-	public void setFormatoEvaluacion(FormatoEvaluacion formatoEvaluacion) {
-		this.formatoEvaluacion = formatoEvaluacion;
+	public void setClase(Clase clase) {
+		this.clase = clase;
 	}
 
 	public Desenvuelve getDesenvuelve() {
@@ -164,20 +164,20 @@ public class Evaluacion implements Serializable {
 		this.desenvuelve = desenvuelve;
 	}
 
+	public FormatoEvaluacion getFormatoEvaluacion() {
+		return this.formatoEvaluacion;
+	}
+
+	public void setFormatoEvaluacion(FormatoEvaluacion formatoEvaluacion) {
+		this.formatoEvaluacion = formatoEvaluacion;
+	}
+
 	public Observador getObservador() {
 		return this.observador;
 	}
 
 	public void setObservador(Observador observador) {
 		this.observador = observador;
-	}
-
-	public Clase getClase() {
-		return this.clase;
-	}
-
-	public void setClase(Clase clase) {
-		this.clase = clase;
 	}
 
 	public List<Resultado> getResultados() {

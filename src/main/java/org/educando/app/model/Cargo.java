@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -19,12 +15,10 @@ public class Cargo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	@Column(name="id_cargo")
 	private int idCargo;
 
-	@Column(name="activo")
-	private boolean activo;
+	private byte activo;
 
 	@Column(name="cargo_codigo")
 	private String cargoCodigo;
@@ -33,7 +27,6 @@ public class Cargo implements Serializable {
 	private String cargoDescripcion;
 
 	//bi-directional many-to-many association to Persona
-	@JsonIgnore
 	@ManyToMany(mappedBy="cargos")
 	private List<Persona> personas;
 
@@ -48,11 +41,11 @@ public class Cargo implements Serializable {
 		this.idCargo = idCargo;
 	}
 
-	public boolean getActivo() {
+	public byte getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(boolean activo) {
+	public void setActivo(byte activo) {
 		this.activo = activo;
 	}
 

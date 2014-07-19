@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -19,7 +15,6 @@ public class Seccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	@Column(name="id_seccion")
 	private int idSeccion;
 
@@ -27,7 +22,6 @@ public class Seccion implements Serializable {
 	private String seccionNombre;
 
 	//bi-directional many-to-one association to Clase
-	@JsonIgnore
 	@OneToMany(mappedBy="seccion")
 	private List<Clase> clases;
 

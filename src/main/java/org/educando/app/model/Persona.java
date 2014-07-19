@@ -1,11 +1,7 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 
@@ -34,8 +30,11 @@ public class Persona implements Serializable {
 	@Column(name="persona_snombre")
 	private String personaSnombre;
 
+	//bi-directional many-to-one association to Observador
+	@OneToMany(mappedBy="persona")
+	private List<Observador> observadors;
+
 	//bi-directional many-to-many association to Cargo
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="desenvuelve"
@@ -47,11 +46,6 @@ public class Persona implements Serializable {
 			}
 		)
 	private List<Cargo> cargos;
-
-	//bi-directional many-to-one association to Observador
-	@JsonIgnore
-	@OneToMany(mappedBy="persona")
-	private List<Observador> observadors;
 
 	public Persona() {
 	}
@@ -96,14 +90,6 @@ public class Persona implements Serializable {
 		this.personaSnombre = personaSnombre;
 	}
 
-	public List<Cargo> getCargos() {
-		return this.cargos;
-	}
-
-	public void setCargos(List<Cargo> cargos) {
-		this.cargos = cargos;
-	}
-
 	public List<Observador> getObservadors() {
 		return this.observadors;
 	}
@@ -124,6 +110,14 @@ public class Persona implements Serializable {
 		observador.setPersona(null);
 
 		return observador;
+	}
+
+	public List<Cargo> getCargos() {
+		return this.cargos;
+	}
+
+	public void setCargos(List<Cargo> cargos) {
+		this.cargos = cargos;
 	}
 
 }
