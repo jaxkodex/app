@@ -205,13 +205,13 @@
 <button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
 <button class="btn btn-link addgradobtn hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></button>
 <button class="btn btn-link removenivelbtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
-<input type="text" value="<\%=nivelNombre%>" class="form-control input-sm">
+<input type="text" value="<\%=nivelNombre%>" class="form-control input-sm edit">
 <ul></ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaGrado">
 <span class="hidden_on_editing"><\%=gradoNombre%></span>
 <button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
-<input type="text" value="<\%=gradoNombre%>" class="form-control input-sm">
+<input type="text" value="<\%=gradoNombre%>" class="form-control input-sm edit">
 <ul></ul>
 </script>
 <script type="text/template" id="asignacionDocenteList">

@@ -8,9 +8,16 @@ body {
 	background: #fff;
 }
 
+.edit, .editing .hidden_on_editing {
+	display: none;
+}
+.editing .edit {
+	display: block;
+}
+
 /*.estructuraie-nivel.edit > .editbtn, 
 .estructuraie-nivel.edit > .desc, .estructuraie-nivel.edit > .addgradobtn, 
-.estructuraie-nivel.edit > .removenivelbtn,*/
+.estructuraie-nivel.edit > .removenivelbtn,
 .estructuraie-nivel {}
 .estructuraie-nivel > input, 
 .estructuraie-nivel.edit > .hidden_on_editing {
@@ -18,4 +25,4 @@ body {
 }
 .estructuraie-nivel.edit > input {
 	display: block
-}
+}*/

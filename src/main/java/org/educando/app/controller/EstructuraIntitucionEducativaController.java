@@ -50,7 +50,7 @@ public class EstructuraIntitucionEducativaController {
 	
 	@RequestMapping(value="/grado", method=RequestMethod.GET)
 	public @ResponseBody List<Grado> indexGrado (@RequestParam(required=false) Integer idNivel) {
-		if (idNivel == null) return gradoService.getGradoByNivel(nivelService.load(idNivel));
+		if (idNivel != null) return gradoService.getGradoByNivel(nivelService.load(idNivel));
 		return gradoService.listAll();
 	}
 	
