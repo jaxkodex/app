@@ -19,6 +19,7 @@ public class Seccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_seccion")
 	private int idSeccion;
 
@@ -31,7 +32,6 @@ public class Seccion implements Serializable {
 	private List<Clase> clases;
 
 	//bi-directional many-to-one association to Grado
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_grado")
 	private Grado grado;

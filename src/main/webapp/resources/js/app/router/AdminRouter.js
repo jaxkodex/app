@@ -131,10 +131,10 @@ var AdminRouter = Backbone.Router.extend({
 				view.collection.trigger('add');
 			}
 		});
-		view.institucionCollection.fetch({
+		view.options.institucionCollection.fetch({
 			silent: true, 
 			success: function () {
-				view.institucionCollection.trigger('add');
+				view.options.institucionCollection.trigger('add');
 			}
 		});
 	}

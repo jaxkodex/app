@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.educando.app.model.Grado;
 import org.educando.app.model.Nivel;
+import org.educando.app.model.Seccion;
 import org.educando.app.service.GradoService;
 import org.educando.app.service.NivelService;
 import org.educando.app.service.SeccionService;
@@ -63,5 +64,36 @@ public class EstructuraIntitucionEducativaController {
 	public @ResponseBody Grado updateGrado (@RequestBody Grado grado, @PathVariable Integer idGrado) {
 		return gradoService.update(grado);
 	}
-
+	
+	@RequestMapping(value="/grado/{idGrado}", method=RequestMethod.DELETE)
+	public @ResponseBody Map<String, Object> deleteGrado (@PathVariable Integer idGrado) {
+		Map<String, Object> m = new HashMap<String, Object>();
+		gradoService.delete(idGrado);
+		m.put("success", true);
+		return m;
+	}
+	
+	@RequestMapping(value="/seccion", method=RequestMethod.GET)
+	public @ResponseBody List<Seccion> indexSeccion (@RequestParam(required=false) Integer idGrado) {
+		if (idGrado != null) return seccionService.getSeccionByGrado(gradoService.load(idGrado));
+		return seccionService.listAll();
+	}
+	
+	@RequestMapping(value="/seccion", method=RequestMethod.POST)
+	public @ResponseBody Seccion createSeccion (@RequestBody Seccion seccion) {
+		return seccionService.create(seccion);
+	}
+	
+	@RequestMapping(value="/seccion/{idSeccion}", method=RequestMethod.PUT)
+	public @ResponseBody Seccion updateSeccion (@RequestBody Seccion seccion, @PathVariable Integer idSeccion) {
+		return seccionService.update(seccion);
+	}
+	
+	@RequestMapping(value="/seccion/{idSeccion}", method=RequestMethod.DELETE)
+	public @ResponseBody Map<String, Object> deleteSeccion (@PathVariable Integer idSeccion) {
+		Map<String, Object> m = new HashMap<String, Object>();
+		seccionService.delete(idSeccion);
+		m.put("success", true);
+		return m;
+	}
 }

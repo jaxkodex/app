@@ -50,6 +50,7 @@
 				<li><a href="#cargo">Cargo</a></li>
 				<li><a href="#periodoacademico">Periodo Academico</a></li>
 				<li><a href="#estructuraie">Estructura IE</a></li>
+				<li><a href="#planadocente">Plana Docente</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -203,15 +204,24 @@
 <script type="text/template" id="estructuraInstitucionEducativaNivel">
 <span class="desc hidden_on_editing"><\%=nivelNombre%></span>
 <button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
-<button class="btn btn-link addgradobtn hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></button>
-<button class="btn btn-link removenivelbtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
+<button class="btn btn-link btn-xs addgradobtn hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></button>
+<button class="btn btn-link btn-xs removenivelbtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
 <input type="text" value="<\%=nivelNombre%>" class="form-control input-sm edit">
 <ul></ul>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaGrado">
 <span class="hidden_on_editing"><\%=gradoNombre%></span>
 <button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-link btn-xs addbtn hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></button>
+<button class="btn btn-link btn-xs removebtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
 <input type="text" value="<\%=gradoNombre%>" class="form-control input-sm edit">
+<ul></ul>
+</script>
+<script type="text/template" id="estructuraInstitucionEducativaSeccion">
+<span class="hidden_on_editing"><\%=seccionNombre%></span>
+<button class="btn btn-link btn-xs editbtn hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></button>
+<button class="btn btn-link btn-xs removebtn hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></button>
+<input type="text" value="<\%=seccionNombre%>" class="form-control input-sm edit">
 <ul></ul>
 </script>
 <script type="text/template" id="asignacionDocenteList">
@@ -234,7 +244,59 @@
 	</tbody>
 </table>
 </script>
-
+<script type="text/template" id="asignacionDocenteForm">
+<form>
+<div class="form-group">
+	<label for="personaDni">DNI</label>
+	<input class="form-control input-sm" id="personaDni" value="<\%=personaDni%>" />
+</div>
+<div class="form-group">
+	<label for="personaApaterno">Nombres</label>
+	<div class="col-sm-12">
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaApaterno" value="<\%=personaApaterno%>" placeholder="Apellido paterno" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaAmaterno" value="<\%=personaAmaterno%>" placeholder="Apellido materno" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaPnombre" value="<\%=personaPnombre%>" placeholder="Primer Nombre" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaSnombre" value="<\%=personaSnombre%>" placeholder="Nombres" />
+		</div>
+	</div>
+</div>
+</form>
+</script>
+<form>
+<div class="form-group">
+	<label for="personaDni">DNI</label>
+	<input class="form-control input-sm" id="personaDni" value="<\%=personaDni%>" />
+</div>
+<div class="form-group">
+	<label for="personaApaterno">Nombres</label>
+	<div class="row">
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaApaterno" value="<\%=personaApaterno%>" placeholder="Apellido paterno" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaAmaterno" value="<\%=personaAmaterno%>" placeholder="Apellido materno" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaPnombre" value="<\%=personaPnombre%>" placeholder="Primer Nombre" />
+		</div>
+		<div class="col-sm-3">
+			<input class="form-control input-sm" id="personaSnombre" value="<\%=personaSnombre%>" placeholder="Nombres" />
+		</div>
+	</div>
+</div>
+<div class="form-group">
+	<label for="idCargo">Cargo</label>
+	<select class="form-control" id="idCargo">
+	</select>
+</div>
+</form>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>

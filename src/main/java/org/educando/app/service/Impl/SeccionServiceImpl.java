@@ -2,6 +2,7 @@ package org.educando.app.service.Impl;
 
 import java.util.List;
 
+import org.educando.app.model.Grado;
 import org.educando.app.model.Seccion;
 import org.educando.app.repository.SeccionRepository;
 import org.educando.app.service.SeccionService;
@@ -36,6 +37,11 @@ public class SeccionServiceImpl implements SeccionService {
 	@Override
 	public void delete(Integer id) {
 		seccionRepository.delete(id);
+	}
+
+	@Override
+	public List<Seccion> getSeccionByGrado(Grado grado) {
+		return seccionRepository.findByGrado(grado);
 	}
 
 }
