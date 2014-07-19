@@ -66,15 +66,21 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 
 var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	initialize: function (options) {
-		var options = options || {};
-		if (typeof options.router != 'undefined') {
-			this.router = options.router;
-		}
-		if (typeof options.gradoCollection != 'undefined') {
-			this.gradoCollection = options.gradoCollection;
-		}
-		console.log(this.gradoCollection);
+		var me = this;
+		this.options = options || {};
+		this.gradoCollection = new GradoCollection;
+		
+		this.gradoCollection.fetch({
+			data: {
+				idNivel: this.model.get('idNivel')
+			},
+			reset: true,
+			silent: true,
+			success: function () { me.gradoCollection.trigger('add'); }
+		});
+
 		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.gradoCollection, 'add reset remove', this.renderGradoList);
 	},
 	tagName: 'li',
 	className: 'estructuraie-nivel',
@@ -91,7 +97,7 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	},
 	edit: function (evt) {
 		evt.preventDefault();
-		this.$el.addClass('edit');
+		this.$el.addClass('editing');
 		this.$el.find('input').focus();
 	},
 	update: function (evt) {
@@ -107,8 +113,42 @@ var EstructuraInstitucionEducativaNivelView = Backbone.View.extend({
 	},
 	addGrado: function (evt) {
 		evt.preventDefault();
-		this.gradoCollection.create({
+		this.options.gradoCollection.create({
 			nivel: { idNivel: this.model.get('idNivel'), }
 		});
+	},
+	renderGradoList: function () {
+		console.log('Updating with grado para nivel: '+this.model.get('idNivel'));
+		console.log(this.gradoCollection.toJSON());
+		var container = document.createDocumentFragment();
+		this.gradoCollection.each(function (val) {
+			var gradoView = new EstructuraInstitucionEducativaGradoView ({
+				model: val
+			});
+			container.appendChild(gradoView.render().el);
+		});
+		this.$('ul').empty().append(container);
 	}
 });
+
+var EstructuraInstitucionEducativaGradoView = Backbone.View.extend({
+	tagName: 'li',
+	className: 'estructuraie-grado',
+	template: _.template($('#estructuraInstitucionEducativaGrado').html()),
+	events: {
+		'click .editbtn': 'edit'
+	},
+	render: function () {
+		this.$el.html(this.template(this.model.toJSON()));
+		return this;
+	},
+	edit: function (evt) {
+		evt.preventDefault();
+		this
+	}
+});
+
+
+
+
+/****/
