@@ -18,7 +18,7 @@ public class Cargo implements Serializable {
 	@Column(name="id_cargo")
 	private int idCargo;
 
-	private byte activo;
+	private boolean activo;
 
 	@Column(name="cargo_codigo")
 	private String cargoCodigo;

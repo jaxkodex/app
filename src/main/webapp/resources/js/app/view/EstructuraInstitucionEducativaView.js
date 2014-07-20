@@ -51,7 +51,7 @@ var EstructuraInstitucionEducativaView = Backbone.View.extend({
 		this.collection.create({
 			institucionEducativa: { idInstitucion: this.$el.find('select').val() },
 			nivelNombre: 'Nuevo nivel'
-		});
+		}, { wait: true });
 	}
 });
 

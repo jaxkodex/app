@@ -12,16 +12,20 @@ public class ACargoPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="clase_id_clase", insertable=false, updatable=false)
+//	@Column(name="clase_id_clase", insertable=false, updatable=false)
+	@Column(name="clase_id_clase")
 	private int claseIdClase;
 
-	@Column(name="id_cargo", insertable=false, updatable=false)
+//	@Column(name="id_cargo", insertable=false, updatable=false)
+	@Column(name="id_cargo")
 	private int idCargo;
 
-	@Column(name="persona_dni", insertable=false, updatable=false)
+//	@Column(name="persona_dni", insertable=false, updatable=false)
+	@Column(name="persona_dni")
 	private String personaDni;
 
-	@Column(name="id_area", insertable=false, updatable=false)
+//	@Column(name="id_area", insertable=false, updatable=false)
+	@Column(name="id_area")
 	private int idArea;
 
 	public ACargoPK() {

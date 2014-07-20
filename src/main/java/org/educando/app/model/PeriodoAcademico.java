@@ -21,7 +21,7 @@ public class PeriodoAcademico implements Serializable {
 	private int idPeriodo;
 
 	@Column(name="periodo_activo")
-	private byte periodoActivo;
+	private boolean periodoActivo;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="periodo_ffin")
