@@ -15,6 +15,7 @@ public class Evaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_evaluacion")
 	private int idEvaluacion;
 

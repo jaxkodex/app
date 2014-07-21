@@ -26,3 +26,13 @@ body {
 .estructuraie-nivel.edit > input {
 	display: block
 }*/
+
+.seccion {
+	padding: 10px 0px 10px 0px;
+	background: #f7f7f9;
+}
+.seccion .seccion-header { padding: 5px 0px 5px 0px; }
+.criterio {
+	padding: 5px 0px 5px 0px;
+	background: #fff;
+}

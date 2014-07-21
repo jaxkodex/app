@@ -1,7 +1,11 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class PeriodoAcademico implements Serializable {
 	private String periodoNombre;
 
 	//bi-directional many-to-one association to Clase
+	@JsonIgnore
 	@OneToMany(mappedBy="periodoAcademico")
 	private List<Clase> clases;
 
@@ -49,11 +54,11 @@ public class PeriodoAcademico implements Serializable {
 		this.idPeriodo = idPeriodo;
 	}
 
-	public byte getPeriodoActivo() {
+	public boolean getPeriodoActivo() {
 		return this.periodoActivo;
 	}
 
-	public void setPeriodoActivo(byte periodoActivo) {
+	public void setPeriodoActivo(boolean periodoActivo) {
 		this.periodoActivo = periodoActivo;
 	}
 

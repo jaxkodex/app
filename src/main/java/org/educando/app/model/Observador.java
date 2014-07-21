@@ -15,6 +15,7 @@ public class Observador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_observador")
 	private int idObservador;
 

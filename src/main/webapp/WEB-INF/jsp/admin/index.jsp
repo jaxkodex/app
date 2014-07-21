@@ -44,6 +44,11 @@
 <script type="text/template" id="workspaceTemplate">
 <div class="col-sm-2">
 	<ul class="list-unstyled">
+		<li>Configuración
+			<ul>
+				<li><a href="#config/fichamonitoreo">Ficha de Monitoreo</a></li>
+			</ul>
+		</li>
 		<li>Administración
 			<ul>
 				<li><a href="#institucioneducativa">Institucion Educativa</a></li>
@@ -252,30 +257,6 @@
 </div>
 <div class="form-group">
 	<label for="personaApaterno">Nombres</label>
-	<div class="col-sm-12">
-		<div class="col-sm-3">
-			<input class="form-control input-sm" id="personaApaterno" value="<\%=personaApaterno%>" placeholder="Apellido paterno" />
-		</div>
-		<div class="col-sm-3">
-			<input class="form-control input-sm" id="personaAmaterno" value="<\%=personaAmaterno%>" placeholder="Apellido materno" />
-		</div>
-		<div class="col-sm-3">
-			<input class="form-control input-sm" id="personaPnombre" value="<\%=personaPnombre%>" placeholder="Primer Nombre" />
-		</div>
-		<div class="col-sm-3">
-			<input class="form-control input-sm" id="personaSnombre" value="<\%=personaSnombre%>" placeholder="Nombres" />
-		</div>
-	</div>
-</div>
-</form>
-</script>
-<form>
-<div class="form-group">
-	<label for="personaDni">DNI</label>
-	<input class="form-control input-sm" id="personaDni" value="<\%=personaDni%>" />
-</div>
-<div class="form-group">
-	<label for="personaApaterno">Nombres</label>
 	<div class="row">
 		<div class="col-sm-3">
 			<input class="form-control input-sm" id="personaApaterno" value="<\%=personaApaterno%>" placeholder="Apellido paterno" />
@@ -297,6 +278,62 @@
 	</select>
 </div>
 </form>
+</script>
+
+
+<!-- Configuracion -->
+<script type="text/template" id="fichaMonitoreoFormTemplate">
+<h4>Formato de Evaluación</h4>
+<form>
+	<div class="form-group">
+		<label for="formatoVersion">Versión</label>
+		<input type="text" class="form-control input-sm" id="formatoVersion" />
+	</div>
+	<div class="form-group">
+		<label for="formatoFecha">Fecha</label>
+		<input type="text" class="form-control input-sm" id="formatoFecha" />
+	</div>
+	<div class="form-group">
+		<label>Secciones</label>
+	</div>
+	<div class="form-group secciones">
+	</div>
+</form>
+</script>
+<script type="text/template" id="fichaMonitoreoSeccionFormTemplate">
+			<div class="row seccion-header">
+				<div class="col-sm-12">
+					<div class="col-sm-1">
+						<input type="text" class="form-control input-sm" />
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control input-sm" />
+					</div>
+					<div class="col-sm-1">
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+			</div>
+</script>
+<script type="text/template" id="fichaMonitoreoCriterioFormTemplate">
+				<div class="col-sm-12">
+					<div class="col-sm-7 col-sm-offset-1">
+						<input type="text" class="form-control input-sm" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-2">
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a>
+					</div>
+				</div>
+</script>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>

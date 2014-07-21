@@ -15,11 +15,15 @@ public class Resultado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	@Column(name="id_resultado")
 	private int idResultado;
 
 	@Column(name="resultado_valor")
 	private int resultadoValor;
+
+	@Column(name="resultado_text")
+	private String resultadoText;
 
 	//bi-directional many-to-many association to Opcion
 	@ManyToMany(mappedBy="resultados1")
