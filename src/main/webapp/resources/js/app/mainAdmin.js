@@ -10,5 +10,6 @@ $(function () {
 	app.workspace.render();
 	new WorkspaceRouter;
 	new AdminRouter;
+	new ConfigRouter;
 	Backbone.history.start();
 });

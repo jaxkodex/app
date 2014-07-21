@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.educando.app.service.BaseCrudService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class BaseCrudServiceImpl<T, ID extends Serializable, Repo extends JpaRepository<T, ID>> implements BaseCrudService<T, ID, Repo> {
+	@Autowired
 	Repo repo;
 
 	@Override

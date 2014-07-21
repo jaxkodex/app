@@ -282,8 +282,31 @@
 
 
 <!-- Configuracion -->
+<script type="text/template" id="fichaMonitoreoListTemplate">
+<h4>Ficha de monitoreo</h4>
+<div class="row">
+	<div class="col-sm-12 clearfix">
+		<a class="btn btn-default btn-sm pull-right" href="#config/fichamonitoreo/edit"><span class="glyphicon glyphicon-plus"></span></a>
+	</div>
+</div>
+<table>
+<thead>
+	<tr>
+		<th>Fecha</th>
+		<th>Versión</th>
+		<th></th>
+	</tr>
+</thead>
+<tbody></tbody>
+</table>
+</script>
+<script type="text/template" id="fichaMonitoreoItemListTemplate">
+<td><\%=formatoFecha%></td>
+<td><\%=formatoVersion%></td>
+<td></td>
+</script>
 <script type="text/template" id="fichaMonitoreoFormTemplate">
-<h4>Formato de Evaluación</h4>
+<h4>Ficha de monitoreo</h4>
 <form>
 	<div class="form-group">
 		<label for="formatoVersion">Versión</label>
@@ -348,6 +371,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/NivelModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/GradoModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SeccionModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/FichaMonitoreoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SecccionFichaMonitoreoModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>
@@ -356,16 +381,20 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/NivelCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/GradoCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/SeccionCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/FichaMonitoreoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/SeccionFichaMonitoreoCollection.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/CargoView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/PeriodoAcademicoView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/EstructuraInstitucionEducativaView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/FichaMonitoreoView.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/EvaluacionDocenteRouter.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/ConfigRouter.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mainAdmin.js"></script>
 </body>

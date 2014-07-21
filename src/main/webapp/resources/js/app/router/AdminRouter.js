@@ -51,7 +51,7 @@ var AdminRouter = Backbone.Router.extend({
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
 		//$('#workspace').empty().append(view.render().$el);
-		if (id != null) view.model.fetch(); 
+		if (id != null) view.model.fetch();
 	},
 	cargoIndex: function () {
 		var view = new CargoListView({
