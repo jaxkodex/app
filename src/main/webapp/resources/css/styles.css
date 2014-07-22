@@ -31,7 +31,7 @@ body {
 	padding: 10px 0px 10px 0px;
 	background: #f7f7f9;
 }
-.seccion .seccion-header { padding: 5px 0px 5px 0px; }
+.seccion .seccion-header, .opcion { padding: 5px 0px 5px 0px; }
 .criterio {
 	padding: 5px 0px 5px 0px;
 	background: #fff;

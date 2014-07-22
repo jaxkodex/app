@@ -331,15 +331,16 @@
 					<div class="col-sm-1">
 						<input type="text" class="form-control input-sm" />
 					</div>
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 						<input type="text" class="form-control input-sm" />
 					</div>
-					<div class="col-sm-1">
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+					<div class="col-sm-2">
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio"><span class="glyphicon glyphicon-plus"></span></a>
 						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 			</div>
+			<div class="criterios"></div>
 </script>
 <script type="text/template" id="fichaMonitoreoCriterioFormTemplate">
 				<div class="col-sm-12">
@@ -354,8 +355,27 @@
 					</div>
 					<div class="col-sm-2">
 						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-add-opcion"><span class="glyphicon glyphicon-plus"></span></a>
 						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a>
+						<!--a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a-->
+					</div>
+				</div>
+				<div class="col-sm-12 opciones"></div>
+</script>
+<script type="text/template" id="fichaMonitoreoOpcionFormTemplate">
+				<div class="col-sm-12">
+					<div class="col-sm-6 col-sm-offset-2">
+						<input type="text" class="form-control input-sm" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-2">
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 </script>
@@ -377,6 +397,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SeccionModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/FichaMonitoreoModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SeccionFichaMonitoreoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/CriterioFichaMonitoreoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/OpcionFichaMonitoreoModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>
@@ -387,6 +409,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/SeccionCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/FichaMonitoreoCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/SeccionFichaMonitoreoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/CriterioFichaMonitoreoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/OpcionFichaMonitoreoCollection.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/InstitucionEducativaView.js"></script>
