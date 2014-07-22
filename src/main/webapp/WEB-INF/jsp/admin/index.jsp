@@ -9,6 +9,7 @@
 	<title>Administración</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/backbone.modal.css">
 	
 	<script type="text/javascript">
 		baseUrl = '${pageContext.request.contextPath}';
@@ -289,7 +290,7 @@
 		<a class="btn btn-default btn-sm pull-right" href="#config/fichamonitoreo/edit"><span class="glyphicon glyphicon-plus"></span></a>
 	</div>
 </div>
-<table>
+<table class="table">
 <thead>
 	<tr>
 		<th>Fecha</th>
@@ -316,8 +317,9 @@
 		<label for="formatoFecha">Fecha</label>
 		<input type="text" class="form-control input-sm" id="formatoFecha" />
 	</div>
-	<div class="form-group">
+	<div class="form-group clearfix">
 		<label>Secciones</label>
+		<a class="btn btn-link btn-xs pull-right btn-add-seccion" href="javascript:void(0);"><span class="glyphicon glyphicon-plus"></span></a>
 	</div>
 	<div class="form-group secciones">
 	</div>
@@ -359,10 +361,12 @@
 </script>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.modal.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PersonaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/InstitucionEducativaModel.js"></script>
@@ -372,7 +376,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/GradoModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SeccionModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/FichaMonitoreoModel.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SecccionFichaMonitoreoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/SeccionFichaMonitoreoModel.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/PersonaCollection.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/InstitucionEducativaCollection.js"></script>

@@ -45,8 +45,13 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 		this.listenTo(this.model, 'change', this.render);
 	},
 	template: _.template($('#fichaMonitoreoFormTemplate').html()),
+	events: {
+		'click .btn-add-seccion': 'addSeccion'
+	},
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
+	},
+	addSeccion: function () {
 	}
 });
