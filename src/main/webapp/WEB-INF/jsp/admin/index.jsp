@@ -336,7 +336,7 @@
 					</div>
 					<div class="col-sm-2">
 						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio"><span class="glyphicon glyphicon-plus"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-seccion"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 			</div>
@@ -356,7 +356,7 @@
 					<div class="col-sm-2">
 						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
 						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-add-opcion"><span class="glyphicon glyphicon-plus"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-criterio"><span class="glyphicon glyphicon-remove"></span></a>
 						<!--a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a-->
 					</div>
 				</div>
@@ -375,7 +375,7 @@
 					</div>
 					<div class="col-sm-2">
 						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-opcion"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 </script>

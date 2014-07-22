@@ -58,7 +58,8 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 		me.$('.secciones').empty();
 		this.seccionFichaMonitoreoCollection.each(function (val) {
 			var view = new FichaMonitoreoSeccionFormView({
-				model: val
+				model: val,
+				parent: me
 			});
 			me.$('.secciones').append(view.render().$el);
 		});
@@ -66,6 +67,9 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 	},
 	addSeccion: function () {
 		this.seccionFichaMonitoreoCollection.add({});
+	},
+	removeSeccion: function (model) {
+		this.seccionFichaMonitoreoCollection.remove(model);
 	}
 });
 
@@ -81,7 +85,8 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 	className: 'seccion',
 	template: _.template($('#fichaMonitoreoSeccionFormTemplate').html()),
 	events: {
-		'click .btn-add-criterio': 'addCriterio'
+		'click .btn-add-criterio': 'addCriterio',
+		'click .btn-remove-seccion': 'removeSeccion'
 	},
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
@@ -92,7 +97,8 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 		me.$('.criterios').empty();
 		this.criterioFichaMonitoreoCollection.each(function (val) {
 			var view = new FichaMonitoreoCriterioFormView({
-				model: val
+				model: val,
+				parent: me
 			});
 			me.$('.criterios').append(view.render().$el);
 		});
@@ -100,6 +106,12 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 	},
 	addCriterio: function () {
 		this.criterioFichaMonitoreoCollection.add({});
+	},
+	removeCriterio: function (model) {
+		this.criterioFichaMonitoreoCollection.remove(model);
+	},
+	removeSeccion: function () {
+		this.options.parent.removeSeccion(this.model);
 	}
 });
 
@@ -115,7 +127,8 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 	className: 'row',
 	template: _.template($('#fichaMonitoreoCriterioFormTemplate').html()),
 	events: {
-		'click .btn-add-opcion': 'addOpcion'
+		'click .btn-add-opcion': 'addOpcion',
+		'click .btn-remove-criterio': 'removeCriterio'
 	},
 	render: function () {
 		this.$el.addClass('criterio');
@@ -127,7 +140,8 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 		me.$('.opciones').empty();
 		this.opcionFichaMonitoreoCollection.each(function (val) {
 			var view = new FichaMonitoreoOpcionFormView({
-				model: val
+				model: val,
+				parent: me
 			});
 			me.$('.opciones').append(view.render().$el);
 		});
@@ -135,6 +149,12 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 	},
 	addOpcion: function () {
 		this.opcionFichaMonitoreoCollection.add({});
+	},
+	removeOpcion: function (model) {
+		this.opcionFichaMonitoreoCollection.remove(model);
+	},
+	removeCriterio: function () {
+		this.options.parent.removeCriterio(this.model);
 	}
 });
 
@@ -147,9 +167,16 @@ var FichaMonitoreoOpcionFormView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'row',
 	template: _.template($('#fichaMonitoreoOpcionFormTemplate').html()),
+	events: {
+		'click .btn-remove-opcion': 'remove'
+	},
 	render: function () {
 		this.$el.addClass('opcion');
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
+	},
+	remove: function (evt) {
+		evt.preventDefault();
+		this.options.parent.removeOpcion(this.model);
 	}
 });
