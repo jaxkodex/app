@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Opcion.findAll", query="SELECT o FROM Opcion o")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
 public class Opcion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
