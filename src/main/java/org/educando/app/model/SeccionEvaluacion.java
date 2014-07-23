@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="seccion_evaluacion")
 @NamedQuery(name="SeccionEvaluacion.findAll", query="SELECT s FROM SeccionEvaluacion s")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
 public class SeccionEvaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
