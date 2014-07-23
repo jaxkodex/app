@@ -323,6 +323,9 @@
 	</div>
 	<div class="form-group secciones">
 	</div>
+	<div class="col-sm-12 clearfix">
+		<input class="btn btn-primary btn-sm" type="submit" value="Guardar" />
+	</div>
 </form>
 </script>
 <script type="text/template" id="fichaMonitoreoSeccionFormTemplate">
@@ -365,7 +368,8 @@
 <script type="text/template" id="fichaMonitoreoOpcionFormTemplate">
 				<div class="col-sm-12">
 					<div class="col-sm-6 col-sm-offset-2">
-						<input type="text" class="form-control input-sm" />
+						<span class="hidden_on_editing"><\%=opcionDescripcion%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=opcionDescripcion%>" />
 					</div>
 					<div class="col-sm-1 text-center">
 						<input type="checkbox" />
@@ -374,7 +378,7 @@
 						<input type="checkbox" />
 					</div>
 					<div class="col-sm-2">
-						<a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-edit-opcion"><span class="glyphicon glyphicon-pencil"></span></a>
 						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-opcion"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>

@@ -3,5 +3,8 @@
  */
 
 var OpcionFichaMonitoreoModel = Backbone.Model.extend({
-	defaults: {}
+	idAttribute: 'idOpcion',
+	defaults: {
+		opcionDescripcion: 'Nueva Opcion'
+	}
 });

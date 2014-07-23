@@ -8,10 +8,10 @@ body {
 	background: #fff;
 }
 
-.edit, .editing > .hidden_on_editing {
+.edit, .editing .hidden_on_editing {
 	display: none;
 }
-.editing > .edit {
+.editing .edit {
 	display: block;
 }
 

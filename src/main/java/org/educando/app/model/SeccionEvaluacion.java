@@ -1,7 +1,12 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 
@@ -12,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="seccion_evaluacion")
 @NamedQuery(name="SeccionEvaluacion.findAll", query="SELECT s FROM SeccionEvaluacion s")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class SeccionEvaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +33,7 @@ public class SeccionEvaluacion implements Serializable {
 	private String seccionNombre;
 
 	//bi-directional many-to-one association to Criterio
-	@OneToMany(mappedBy="seccionEvaluacion")
+	@OneToMany(mappedBy="seccionEvaluacion", fetch=FetchType.EAGER)
 	private List<Criterio> criterios;
 
 	//bi-directional many-to-one association to FormatoEvaluacion

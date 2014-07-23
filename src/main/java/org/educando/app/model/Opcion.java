@@ -1,7 +1,13 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 
@@ -11,6 +17,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Opcion.findAll", query="SELECT o FROM Opcion o")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Opcion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,6 +35,7 @@ public class Opcion implements Serializable {
 	private Criterio criterio;
 
 	//bi-directional many-to-many association to Resultado
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="resultado_has_opcion"
@@ -41,6 +49,7 @@ public class Opcion implements Serializable {
 	private List<Resultado> resultados1;
 
 	//bi-directional many-to-many association to Resultado
+	@JsonIgnore
 	@ManyToMany(mappedBy="opcions2")
 	private List<Resultado> resultados2;
 
