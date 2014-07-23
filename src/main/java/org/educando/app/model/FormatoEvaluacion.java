@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name="formato_evaluacion")
 @NamedQuery(name="FormatoEvaluacion.findAll", query="SELECT f FROM FormatoEvaluacion f")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
 public class FormatoEvaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
