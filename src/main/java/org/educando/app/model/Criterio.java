@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Criterio.findAll", query="SELECT c FROM Criterio c")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
 public class Criterio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
