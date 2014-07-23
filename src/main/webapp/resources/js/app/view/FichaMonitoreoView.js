@@ -83,7 +83,7 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 	initialize: function (options) {
 		this.options = options;
-		this.criterioFichaMonitoreoCollection = new CriterioFichaMonitoreoCollection;
+		this.criterioFichaMonitoreoCollection = new CriterioFichaMonitoreoCollection(this.model.get('criterios'));
 
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.criterioFichaMonitoreoCollection, 'add remove reset', this.updateCriterioMonitoreo);
@@ -127,7 +127,7 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 	initialize: function (options) {
 		this.options = options;
-		this.opcionFichaMonitoreoCollection = new OpcionFichaMonitoreoCollection;
+		this.opcionFichaMonitoreoCollection = new OpcionFichaMonitoreoCollection(this.model.get('opcions'));
 
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.opcionFichaMonitoreoCollection, 'add remove reset', this.updateOpcionMonitoreo);
@@ -154,8 +154,8 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 		return this;
 	},
 	updateOpcionMonitoreo: function () {
+		console.log(this.opcionFichaMonitoreoCollection.toJSON());
 		this.model.set('opcions', this.opcionFichaMonitoreoCollection.toJSON());
-		console.log(this.model.toJSON());
 		return this;
 	},
 	addOpcion: function () {
