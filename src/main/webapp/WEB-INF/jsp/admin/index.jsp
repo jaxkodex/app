@@ -332,10 +332,12 @@
 			<div class="row seccion-header">
 				<div class="col-sm-12">
 					<div class="col-sm-1">
-						<input type="text" class="form-control input-sm" />
+						<span class="hidden_on_editing"><\%=seccionCodigo%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=seccionCodigo%>" />
 					</div>
 					<div class="col-sm-9">
-						<input type="text" class="form-control input-sm" />
+						<span class="hidden_on_editing"><\%=seccionNombre%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=seccionNombre%>" />
 					</div>
 					<div class="col-sm-2">
 						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio"><span class="glyphicon glyphicon-plus"></span></a>
@@ -348,7 +350,8 @@
 <script type="text/template" id="fichaMonitoreoCriterioFormTemplate">
 				<div class="col-sm-12">
 					<div class="col-sm-7 col-sm-offset-1">
-						<input type="text" class="form-control input-sm" />
+						<span class="hidden_on_editing"><\%=criterioDescripcion%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=criterioDescripcion%>" />
 					</div>
 					<div class="col-sm-1 text-center">
 						<input type="checkbox" />

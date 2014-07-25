@@ -40,7 +40,7 @@ var FichaMonitoreoItemListView = Backbone.View.extend({
 var FichaMonitoreoFormView = Backbone.View.extend({
 	initialize: function (options) {
 		this.options = options;
-		this.seccionFichaMonitoreoCollection = new SeccionFichaMonitoreoCollection;
+		this.seccionFichaMonitoreoCollection = new SeccionFichaMonitoreoCollection(this.model.get('seccionEvaluacions'));
 
 		this.listenTo(this.model, 'change', this.render);
 		this.listenTo(this.seccionFichaMonitoreoCollection, 'add remove reset', this.renderSeccionMonitoreo);
@@ -51,6 +51,7 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 		'submit form': 'guardarData'
 	},
 	render: function () {
+		console.log(this.model.toJSON());
 		var me = this;
 		this.$el.html(this.template(this.model.toJSON()));
 		this.$('.secciones').empty();
@@ -114,7 +115,6 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 	},
 	addCriterio: function () {
 		this.criterioFichaMonitoreoCollection.add({});
-		console.log(this.model.toJSON());
 	},
 	removeCriterio: function (model) {
 		this.criterioFichaMonitoreoCollection.remove(model);
@@ -126,6 +126,7 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 
 var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 	initialize: function (options) {
+		console.log(this.model.toJSON());
 		this.options = options;
 		this.opcionFichaMonitoreoCollection = new OpcionFichaMonitoreoCollection(this.model.get('opcions'));
 
@@ -140,6 +141,7 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 		'click .btn-remove-criterio': 'removeCriterio'
 	},
 	render: function () {
+		console.log(this.model.toJSON());
 		var me = this;
 		this.$el.addClass('criterio');
 		this.$el.html(this.template(this.model.toJSON()));
@@ -154,7 +156,6 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 		return this;
 	},
 	updateOpcionMonitoreo: function () {
-		console.log(this.opcionFichaMonitoreoCollection.toJSON());
 		this.model.set('opcions', this.opcionFichaMonitoreoCollection.toJSON());
 		return this;
 	},
@@ -195,9 +196,11 @@ var FichaMonitoreoOpcionFormView = Backbone.View.extend({
 	},
 	remove: function (evt) {
 		evt.preventDefault();
-		this.options.parent.removeOpcion(this.model);
+		//this.options.parent.removeOpcion(this.model);
+		this.trigger('remove');
 	},
-	update: function () {
+	update: function (evt) {
+		evt.stopPropagation();
 		this.model.set('opcionDescripcion', this.$('input[type=text]').val());
 		this.$el.removeClass('editing');
 	}

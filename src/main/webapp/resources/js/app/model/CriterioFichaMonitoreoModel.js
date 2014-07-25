@@ -3,5 +3,8 @@
  */
 
 var CriterioFichaMonitoreoModel = Backbone.Model.extend({
-	defaults: {}
+	defaults: {
+		criterioDescripcion: 'Nuevo criterio',
+		opcions: []
+	}
 });
