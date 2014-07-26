@@ -15,25 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/config/persona")
 public class PersonaController {
 	public static final Logger logger = Logger.getLogger(MainController.class);
 	@Autowired
 	PersonaService personaService;
 	
 
-	@RequestMapping(value="", method=RequestMethod.POST)
+	@RequestMapping(value="/api/admin/persona", method=RequestMethod.POST)
 	public @ResponseBody Persona create (@RequestBody Persona persona) {
 		personaService.crear(persona);
 		return persona;
 	}
 
-	@RequestMapping(value="", method=RequestMethod.GET)
+	@RequestMapping(value="/api/admin/persona", method=RequestMethod.GET)
 	public @ResponseBody List<Persona> search (@RequestParam(required=false, defaultValue="") String query) {
 		return personaService.search(query);
 	}
 
-	@RequestMapping(value="/{dni}", method=RequestMethod.GET)
+	@RequestMapping(value="/api/admin/persona/{dni}", method=RequestMethod.GET)
 	public @ResponseBody Persona loadPersona (@PathVariable String dni) {
 		return personaService.findByDni(dni);
 	}

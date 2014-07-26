@@ -37,6 +37,52 @@ var FichaMonitoreoItemListView = Backbone.View.extend({
 	}
 });
 
+app.FichaMonitoreoFormView = Backbone.View.extend({
+	initialize: function () {
+		this.listenTo(this.model, 'change', this.render);
+	},
+	template: _.template($('#fichaMonitoreoFormTemplate').html()),
+	events: {
+		'click .btn-add-seccion': 'addSeccion',
+		'click .btn-add-criterio': 'addCriterio',
+		'click .btn-add-opcion': 'addOpcion',
+		'submit form': 'guardar'
+	},
+	render: function () {
+		console.log('rendering');
+		this.$el.html(this.template(this.model.toJSON()));
+		return this;
+	},
+	addSeccion: function (evt) {
+		evt.preventDefault();
+		this.model.addSeccion();
+	},
+	addCriterio: function (evt) {
+		evt.preventDefault();
+		console.log('add criterio');
+		var target, seccionIndex;
+		target = $(evt.target).hasClass('btn-add-criterio') ? $(evt.target) : $(evt.target).parent();
+		seccionIndex = target.data('seccion');
+		this.model.addCriterio(seccionIndex);
+	},
+	addOpcion: function (evt) {
+		evt.preventDefault();
+		var target, seccionIndex, opcionIndex;
+		target = $(evt.target).hasClass('btn-add-opcion') ? $(evt.target) : $(evt.target).parent();
+		seccionIndex = target.data('seccion');
+		criterioIndex = target.data('criterio');
+		console.log(target);
+		console.log(seccionIndex, criterioIndex);
+		this.model.addOpcion(seccionIndex, criterioIndex);
+	},
+	guardar: function (evt) {
+		evt.preventDefault();
+		console.log(this.model.toJSON());
+	}
+}); 
+
+/*
+
 var FichaMonitoreoFormView = Backbone.View.extend({
 	initialize: function (options) {
 		this.options = options;
@@ -51,7 +97,6 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 		'submit form': 'guardarData'
 	},
 	render: function () {
-		console.log(this.model.toJSON());
 		var me = this;
 		this.$el.html(this.template(this.model.toJSON()));
 		this.$('.secciones').empty();
@@ -69,6 +114,8 @@ var FichaMonitoreoFormView = Backbone.View.extend({
 		return this;
 	},
 	addSeccion: function () {
+		console.log(this.model.toJSON());
+		console.log(this.seccionFichaMonitoreoCollection.toJSON());
 		this.seccionFichaMonitoreoCollection.add({});
 	},
 	removeSeccion: function (model) {
@@ -94,7 +141,7 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 	template: _.template($('#fichaMonitoreoSeccionFormTemplate').html()),
 	events: {
 		'click .btn-add-criterio': 'addCriterio',
-		'click .btn-remove-seccion': 'removeSeccion'
+		'click .btn-remove-seccion': 'removeSeccion'	
 	},
 	render: function () {
 		var me = this;
@@ -126,7 +173,6 @@ var FichaMonitoreoSeccionFormView = Backbone.View.extend({
 
 var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 	initialize: function (options) {
-		console.log(this.model.toJSON());
 		this.options = options;
 		this.opcionFichaMonitoreoCollection = new OpcionFichaMonitoreoCollection(this.model.get('opcions'));
 
@@ -141,7 +187,6 @@ var FichaMonitoreoCriterioFormView = Backbone.View.extend({
 		'click .btn-remove-criterio': 'removeCriterio'
 	},
 	render: function () {
-		console.log(this.model.toJSON());
 		var me = this;
 		this.$el.addClass('criterio');
 		this.$el.html(this.template(this.model.toJSON()));
@@ -205,3 +250,5 @@ var FichaMonitoreoOpcionFormView = Backbone.View.extend({
 		this.$el.removeClass('editing');
 	}
 });
+
+*/

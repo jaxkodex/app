@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/backbone.modal.css">
 	
 	<script type="text/javascript">
-		baseUrl = '${pageContext.request.contextPath}';
+		baseUrl = '${pageContext.request.contextPath}/api/admin';
 	</script>
 </head>
 <body>
@@ -311,6 +311,85 @@
 <form>
 	<div class="form-group">
 		<label for="formatoVersion">Versión</label>
+		<input type="text" class="form-control input-sm" id="formatoVersion" value="<\%=formatoVersion%>" />
+	</div>
+	<div class="form-group">
+		<label for="formatoFecha">Fecha</label>
+		<input type="text" class="form-control input-sm" id="formatoFecha" value="<\%=formatoFecha%>" />
+	</div>
+	<div class="form-group clearfix">
+		<label>Secciones</label>
+		<a class="btn btn-link btn-xs pull-right btn-add-seccion" href="javascript:void(0);"><span class="glyphicon glyphicon-plus"></span></a>
+	</div>
+	<div class="form-group secciones">
+		<\% _.each(seccionEvaluacions, function (val, index) { %>
+			<div class="row seccion-header">
+				<div class="col-sm-12">
+					<div class="col-sm-1">
+						<span class="hidden_on_editing"><\%=val.seccionCodigo%></span>
+						<input id="seccion-<\%=index%>" data-field="seccionCodigo" type="text" class="form-control input-sm edit" value="<\%=val.seccionCodigo%>" />
+					</div>
+					<div class="col-sm-9">
+						<span class="hidden_on_editing"><\%=val.seccionNombre%></span>
+						<input id="seccion-<\%=index%>" data-field="seccionNombre" type="text" class="form-control input-sm edit" value="<\%=val.seccionNombre%>" />
+					</div>
+					<div class="col-sm-2">
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio"><span class="glyphicon glyphicon-plus"></span></a>
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-seccion"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+			</div>
+			<div class="criterios">
+				<\% _.each(val.criterios, function (v, i) { %>
+				<div class="col-sm-12">
+					<div class="col-sm-7 col-sm-offset-1">
+						<span class="hidden_on_editing"><\%=v.criterioDescripcion%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=v.criterioDescripcion%>" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-2">
+						<a href="javascript:void(0);" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a data-seccion="<\%=index%>" data-criterio="<\%=i%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-opcion"><span class="glyphicon glyphicon-plus"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-criterio"><span class="glyphicon glyphicon-remove"></span></a>
+						<!--a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a-->
+					</div>
+				</div>
+				<div class="col-sm-12 opciones">
+				<\% _.each(v.opcions, function (o) { %>
+				<div class="col-sm-12">
+					<div class="col-sm-6 col-sm-offset-2">
+						<span class="hidden_on_editing"><\%=o.opcionDescripcion%></span>
+						<input type="text" class="form-control input-sm edit" value="<\%=o.opcionDescripcion%>" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-1 text-center">
+						<input type="checkbox" />
+					</div>
+					<div class="col-sm-2">
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-edit-opcion"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-opcion"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+				</div>
+				<\% }); %>
+				</div>
+				<\% }); %>
+			</div>
+		<\% }); %>
+	</div>
+	<div class="col-sm-12 clearfix">
+		<input class="btn btn-primary btn-sm" type="submit" value="Guardar" />
+	</div>
+</form>
+<!--form>
+	<div class="form-group">
+		<label for="formatoVersion">Versión</label>
 		<input type="text" class="form-control input-sm" id="formatoVersion" />
 	</div>
 	<div class="form-group">
@@ -326,7 +405,7 @@
 	<div class="col-sm-12 clearfix">
 		<input class="btn btn-primary btn-sm" type="submit" value="Guardar" />
 	</div>
-</form>
+</form-->
 </script>
 <script type="text/template" id="fichaMonitoreoSeccionFormTemplate">
 			<div class="row seccion-header">

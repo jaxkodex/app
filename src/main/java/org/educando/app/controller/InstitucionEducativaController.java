@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/institucion")
 public class InstitucionEducativaController {
 	public static final Logger logger = Logger.getLogger(InstitucionEducativaController.class);
 	@Autowired
 	InstitucionEducativaService institucionEducativaService;
 
-	@RequestMapping(value= "", method=RequestMethod.POST)
+	@RequestMapping(value= "/api/admin/institucion", method=RequestMethod.POST)
 	@ResponseBody
 	public InstitucionEducativa create (@RequestBody InstitucionEducativa institucionEducativa) {
 		logger.debug("Guardando objeto "+institucionEducativa);
@@ -29,21 +28,21 @@ public class InstitucionEducativaController {
 		return institucionEducativa;
 	}
 
-	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.GET)
+	@RequestMapping(value= "/api/admin/institucion/{idInstitucion}", method=RequestMethod.GET)
 	@ResponseBody
 	public InstitucionEducativa load (@PathVariable Integer idInstitucion) {
 		logger.debug("Load Object");
 		return institucionEducativaService.loadById(idInstitucion);
 	}
 
-	@RequestMapping(value= "", method=RequestMethod.GET)
+	@RequestMapping(value= "/api/admin/institucion", method=RequestMethod.GET)
 	@ResponseBody
 	public List<InstitucionEducativa> list (@RequestParam(defaultValue="", required=false) String query) {
 		logger.debug("Listando objetos");
 		return institucionEducativaService.buscaPorNombre(query);
 	}
 
-	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.PUT)
+	@RequestMapping(value= "/api/admin/institucion/{idInstitucion}", method=RequestMethod.PUT)
 	@ResponseBody
 	public InstitucionEducativa update (@RequestBody InstitucionEducativa institucionEducativa, @PathVariable Integer idInstitucion) {
 		logger.debug("Actualizando ie");
@@ -51,7 +50,7 @@ public class InstitucionEducativaController {
 		return institucionEducativa;
 	}
 
-	@RequestMapping(value= "{idInstitucion}", method=RequestMethod.DELETE)
+	@RequestMapping(value= "/api/admin/institucion/{idInstitucion}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public void delete (@PathVariable Integer idInstitucion) {
 		logger.debug("Actualizando ie");

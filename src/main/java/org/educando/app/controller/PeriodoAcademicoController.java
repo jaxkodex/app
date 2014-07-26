@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/periodoacademico")
 public class PeriodoAcademicoController {
 	@Autowired
 	PeriodoAcademicoService periodoAcademicoService;
 	
-	@RequestMapping(value={""}, method=RequestMethod.GET)
+	@RequestMapping(value={"/api/admin/periodoacademico"}, method=RequestMethod.GET)
 	public @ResponseBody List<PeriodoAcademico> index (@RequestParam(required=false, defaultValue="A") String active,
 			@RequestParam(required=false) String all) {
 		if (all != null && all.equals("all")) {
@@ -32,23 +31,23 @@ public class PeriodoAcademicoController {
 		return periodoAcademicoService.getActive(periodoActivo);
 	}
 	
-	@RequestMapping(value={""}, method=RequestMethod.POST)
+	@RequestMapping(value={"/api/admin/periodoacademico"}, method=RequestMethod.POST)
 	public @ResponseBody PeriodoAcademico create (@RequestBody PeriodoAcademico periodoAcademico) {
 		return periodoAcademicoService.save(periodoAcademico);
 	}
 	
-	@RequestMapping(value={"{idPeriodo}"}, method=RequestMethod.PUT)
+	@RequestMapping(value={"/api/admin/periodoacademico/{idPeriodo}"}, method=RequestMethod.PUT)
 	public @ResponseBody PeriodoAcademico update (@RequestBody PeriodoAcademico periodoAcademico,
 			@PathVariable Integer idPeriodo) {
 		return periodoAcademicoService.update(periodoAcademico);
 	}
 	
-	 @RequestMapping(value={"{idPeriodo}"}, method=RequestMethod.GET)
+	 @RequestMapping(value={"/api/admin/periodoacademico/{idPeriodo}"}, method=RequestMethod.GET)
 	 public @ResponseBody PeriodoAcademico load (@PathVariable Integer idPeriodo) {
 		 return periodoAcademicoService.load(idPeriodo);
 	 }
 	
-	 @RequestMapping(value={"{idPeriodo}"}, method=RequestMethod.DELETE)
+	 @RequestMapping(value={"/api/admin/periodoacademico/{idPeriodo}"}, method=RequestMethod.DELETE)
 	 public @ResponseBody void delete (@PathVariable Integer idPeriodo) {
 		 periodoAcademicoService.delete(idPeriodo);
 	 }

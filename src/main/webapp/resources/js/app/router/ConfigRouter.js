@@ -35,6 +35,11 @@ var ConfigRouter = Backbone.Router.extend({
 			});
 			this.fichaMonitoreoCollection.add(model);
 		}
+		var view = new app.FichaMonitoreoFormView ({
+			model: model
+		});
+		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
+		/*
 		var view = new FichaMonitoreoFormView ({
 			model: model, 
 			router: this // This is not supposed to be done
@@ -42,5 +47,6 @@ var ConfigRouter = Backbone.Router.extend({
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);
 		//$('#workspace').empty().append(view.render().$el);
 		if (id != null) view.model.fetch();
+		*/
 	}
 });
