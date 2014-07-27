@@ -40,16 +40,21 @@ var FichaMonitoreoItemListView = Backbone.View.extend({
 app.FichaMonitoreoFormView = Backbone.View.extend({
 	initialize: function () {
 		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this, 'render', this.render);
 	},
 	template: _.template($('#fichaMonitoreoFormTemplate').html()),
 	events: {
 		'click .btn-add-seccion': 'addSeccion',
 		'click .btn-add-criterio': 'addCriterio',
 		'click .btn-add-opcion': 'addOpcion',
+		'click .btn-remove-seccion': 'removeSeccion',
+		'click .btn-remove-criterio': 'removeCriterio',
+		'click .btn-remove-opcion': 'removeOpcion',
+		'click .btn-edit-seccion': 'edit',
+		'click .btn-save-seccion': 'updateObject',
 		'submit form': 'guardar'
 	},
 	render: function () {
-		console.log('rendering');
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
 	},
@@ -59,7 +64,6 @@ app.FichaMonitoreoFormView = Backbone.View.extend({
 	},
 	addCriterio: function (evt) {
 		evt.preventDefault();
-		console.log('add criterio');
 		var target, seccionIndex;
 		target = $(evt.target).hasClass('btn-add-criterio') ? $(evt.target) : $(evt.target).parent();
 		seccionIndex = target.data('seccion');
@@ -71,13 +75,71 @@ app.FichaMonitoreoFormView = Backbone.View.extend({
 		target = $(evt.target).hasClass('btn-add-opcion') ? $(evt.target) : $(evt.target).parent();
 		seccionIndex = target.data('seccion');
 		criterioIndex = target.data('criterio');
-		console.log(target);
-		console.log(seccionIndex, criterioIndex);
 		this.model.addOpcion(seccionIndex, criterioIndex);
 	},
 	guardar: function (evt) {
 		evt.preventDefault();
-		console.log(this.model.toJSON());
+		this.updateObject(evt);
+		this.model.save();
+	},
+	edit: function (evt) {
+		evt.preventDefault();
+		console.log('edit');
+		var target;
+		target = $(evt.target).hasClass('btn-edit-seccion') ? $(evt.target) : $(evt.target).parent();
+		$('#seccion-wrapper-'+target.data('seccion')).addClass('editing');
+		$('#criterios-wrapper-'+target.data('seccion')).addClass('editing');
+	},
+	updateObject: function (evt) {
+		evt.preventDefault();
+		var me, inputs, seccions, obj;
+		inputs = $('input');
+		me = this;
+		obj = this.model.toJSON();
+		seccions = obj.seccionEvaluacions;//_.extend([], this.model.get('seccionEvaluacions'));
+		_.each(inputs, function (val) {
+			var seccion, criterio, opcion, seccionIndex, criterioIndex, opcionIndex, input;
+			input = $(val);
+			seccionIndex = input.data('seccion');
+			criterioIndex = input.data('criterio');
+			opcionIndex = input.data('opcion');
+			if (typeof seccionIndex == 'undefined') {
+				obj[input.data('field')] = input.val();
+				return;
+			}
+			seccion = seccions[seccionIndex];
+			if (typeof opcionIndex == 'undefined' && typeof criterioIndex == 'undefined') {
+				seccion[input.data('field')] = input.val();
+				return;
+			}
+			criterio = seccion.criterios[criterioIndex];
+			if (typeof opcionIndex == 'undefined') {
+				criterio[input.data('field')] = input.val();
+				return;
+			}
+			opcion = criterio.opcions[opcionIndex];
+			opcion[input.data('field')] = input.val();
+		});
+		this.model.set(obj);
+		this.trigger('render');
+	},
+	removeOpcion: function (evt) {
+		evt.preventDefault();
+		var target;
+		target = $(evt.target).hasClass('btn-remove-opcion') ? $(evt.target) : $(evt.target).parent();
+		this.model.removeOpcion(target.data('seccion'), target.data('criterio'), target.data('opcion'));
+	},
+	removeCriterio: function (evt) {
+		evt.preventDefault();
+		var target;
+		target = $(evt.target).hasClass('btn-remove-criterio') ? $(evt.target) : $(evt.target).parent();
+		this.model.removeCriterio(target.data('seccion'), target.data('criterio'));
+	},
+	removeSeccion: function (evt) {
+		evt.preventDefault();
+		var target;
+		target = $(evt.target).hasClass('btn-remove-seccion') ? $(evt.target) : $(evt.target).parent();
+		this.model.removeSeccion(target.data('seccion'));
 	}
 }); 
 

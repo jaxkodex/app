@@ -311,40 +311,42 @@
 <form>
 	<div class="form-group">
 		<label for="formatoVersion">Versión</label>
-		<input type="text" class="form-control input-sm" id="formatoVersion" value="<\%=formatoVersion%>" />
+		<input data-field="formatoVersion" type="text" class="form-control input-sm" id="formatoVersion" value="<\%=formatoVersion%>" />
 	</div>
 	<div class="form-group">
 		<label for="formatoFecha">Fecha</label>
-		<input type="text" class="form-control input-sm" id="formatoFecha" value="<\%=formatoFecha%>" />
+		<input data-field="formatoFecha" type="text" class="form-control input-sm" id="formatoFecha" value="<\%=formatoFecha%>" />
 	</div>
 	<div class="form-group clearfix">
 		<label>Secciones</label>
 		<a class="btn btn-link btn-xs pull-right btn-add-seccion" href="javascript:void(0);"><span class="glyphicon glyphicon-plus"></span></a>
 	</div>
 	<div class="form-group secciones">
-		<\% _.each(seccionEvaluacions, function (val, index) { %>
-			<div class="row seccion-header">
+		<\% _.each(seccionEvaluacions, function (val, index) { if (val == undefined) return; %>
+			<div class="row seccion-header" id="seccion-wrapper-<\%=index%>">
 				<div class="col-sm-12">
-					<div class="col-sm-1">
+					<div class="col-sm-1 text-right">
 						<span class="hidden_on_editing"><\%=val.seccionCodigo%></span>
-						<input id="seccion-<\%=index%>" data-field="seccionCodigo" type="text" class="form-control input-sm edit" value="<\%=val.seccionCodigo%>" />
+						<input data-seccion="<\%=index%>" data-field="seccionCodigo" type="text" class="form-control input-sm edit" value="<\%=val.seccionCodigo%>" />
 					</div>
 					<div class="col-sm-9">
 						<span class="hidden_on_editing"><\%=val.seccionNombre%></span>
-						<input id="seccion-<\%=index%>" data-field="seccionNombre" type="text" class="form-control input-sm edit" value="<\%=val.seccionNombre%>" />
+						<input data-seccion="<\%=index%>" data-field="seccionNombre" type="text" class="form-control input-sm edit" value="<\%=val.seccionNombre%>" />
 					</div>
 					<div class="col-sm-2">
-						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio"><span class="glyphicon glyphicon-plus"></span></a>
-						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-seccion"><span class="glyphicon glyphicon-remove"></span></a>
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-save-seccion edit"><span class="glyphicon glyphicon-floppy-disk"></span></a>
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-edit-seccion hidden_on_editing"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-criterio hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></a>
+						<a data-seccion="<\%=index%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-seccion hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 			</div>
-			<div class="criterios">
-				<\% _.each(val.criterios, function (v, i) { %>
+			<div class="criterios" id="criterios-wrapper-<\%=index%>">
+				<\% _.each(val.criterios, function (v, i) { if (v == undefined) return; %>
 				<div class="col-sm-12">
 					<div class="col-sm-7 col-sm-offset-1">
 						<span class="hidden_on_editing"><\%=v.criterioDescripcion%></span>
-						<input type="text" class="form-control input-sm edit" value="<\%=v.criterioDescripcion%>" />
+						<input data-seccion="<\%=index%>" data-criterio="<\%=i%>" data-field="criterioDescripcion" type="text" class="form-control input-sm edit" value="<\%=v.criterioDescripcion%>" />
 					</div>
 					<div class="col-sm-1 text-center">
 						<input type="checkbox" />
@@ -353,18 +355,16 @@
 						<input type="checkbox" />
 					</div>
 					<div class="col-sm-2">
-						<a href="javascript:void(0);" class="btn btn-link"><span class="glyphicon glyphicon-pencil"></span></a>
-						<a data-seccion="<\%=index%>" data-criterio="<\%=i%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-opcion"><span class="glyphicon glyphicon-plus"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-criterio"><span class="glyphicon glyphicon-remove"></span></a>
-						<!--a href="javascript:void(0);" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-th-list"></span></a-->
+						<a data-seccion="<\%=index%>" data-criterio="<\%=i%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-add-opcion hidden_on_editing"><span class="glyphicon glyphicon-plus"></span></a>
+						<a data-seccion="<\%=index%>" data-criterio="<\%=i%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-criterio hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 				<div class="col-sm-12 opciones">
-				<\% _.each(v.opcions, function (o) { %>
-				<div class="col-sm-12">
+				<\% _.each(v.opcions, function (o, ix) { if (o == undefined) return; %>
+				<div class="col-sm-12" id="opcion-wrapper-<\%=ix%>">
 					<div class="col-sm-6 col-sm-offset-2">
 						<span class="hidden_on_editing"><\%=o.opcionDescripcion%></span>
-						<input type="text" class="form-control input-sm edit" value="<\%=o.opcionDescripcion%>" />
+						<input data-seccion="<\%=index%>" data-criterio="<\%=i%>" data-opcion="<\%=ix%>" data-field="opcionDescripcion" type="text" class="form-control input-sm edit" value="<\%=o.opcionDescripcion%>" />
 					</div>
 					<div class="col-sm-1 text-center">
 						<input type="checkbox" />
@@ -373,8 +373,7 @@
 						<input type="checkbox" />
 					</div>
 					<div class="col-sm-2">
-						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-edit-opcion"><span class="glyphicon glyphicon-pencil"></span></a>
-						<a href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-opcion"><span class="glyphicon glyphicon-remove"></span></a>
+						<a data-seccion="<\%=index%>" data-criterio="<\%=i%>" data-opcion="<\%=ix%>" href="javascript:void(0);" class="btn btn-link btn-sm btn-remove-opcion hidden_on_editing"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 				<\% }); %>

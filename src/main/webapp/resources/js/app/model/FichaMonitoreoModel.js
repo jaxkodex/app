@@ -54,7 +54,46 @@ var FichaMonitoreoModel = Backbone.Model.extend({
 		criterio.opcions.push(obj);
 		seccion.criterios[criterioIndex] = criterio;
 		secciones[seccionIndex] = seccion;
+		this.set('seccionEvaluacions', secciones);
 		this.trigger('change');
+		return this;
+	},
+	removeOpcion: function (seccionIndex, criterioIndex, opcionIndex) {
+		var secciones;
+		secciones = _.extend([], this.get('seccionEvaluacions'));
+		secciones[seccionIndex].criterios[criterioIndex].opcions[opcionIndex] = undefined;
+		this.set('seccionEvaluacions', secciones);
+		this.trigger('change');
+		return this;
+	},
+	removeCriterio: function (seccionIndex, criterioIndex) {
+		var secciones;
+		secciones = _.extend([], this.get('seccionEvaluacions'));
+		secciones[seccionIndex].criterios[criterioIndex] = undefined;
+		this.set('seccionEvaluacions', secciones);
+		this.trigger('change');
+		return this;
+	},
+	removeSeccion: function (seccionIndex) {
+		var secciones;
+		secciones = _.extend([], this.get('seccionEvaluacions'));
+		secciones[seccionIndex] = undefined;
+		this.set('seccionEvaluacions', secciones);
+		this.trigger('change');
+		return this;
+	},
+	getSeccion: function (seccionIndex) {
+		var secciones;
+		secciones = _.extend([], this.get('seccionEvaluacions'));
+		return secciones[seccionIndex];
+	},
+	setSeccion: function (seccionIndex, seccion) {
+		var secciones;
+		if (typeof seccion == 'undefined') return this;
+		secciones = _.extend([], this.get('seccionEvaluacions'));
+		if (seccionIndex < 0 || seccionIndex > secciones.length) return this;
+		secciones[seccionIndex] = seccion;
+		this.set('seccionEvaluacions', secciones);
 		return this;
 	}
 });
