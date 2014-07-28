@@ -36,6 +36,7 @@ var ConfigRouter = Backbone.Router.extend({
 			this.fichaMonitoreoCollection.add(model);
 		}
 		var view = new app.FichaMonitoreoFormView ({
+			collection: this.fichaMonitoreoCollection,
 			model: model
 		});
 		app.workspace.getWorkspaceArea().empty().append(view.render().$el);

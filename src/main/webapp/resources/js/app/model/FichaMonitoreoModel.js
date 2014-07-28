@@ -6,8 +6,11 @@
 var FichaMonitoreoModel = Backbone.Model.extend({
 	defaults: {
 		formatoVersion: '1.0',
-		formatoFecha: '',
+		formatoFecha: (new Date).getTime(),
 		seccionEvaluacions: []
+	},
+	getFormatoFecha: function () {
+		return (new Date(this.get('formatoFecha'))).toString('d/MM/yyyy');
 	},
 	addSeccion: function (seccion) {
 		var obj, secciones;

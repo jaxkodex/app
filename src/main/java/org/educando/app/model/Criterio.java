@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Criterio.findAll", query="SELECT c FROM Criterio c")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="idCriterio")
 public class Criterio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class Criterio implements Serializable {
 	private SeccionEvaluacion seccionEvaluacion;
 
 	//bi-directional many-to-one association to Opcion
-	@OneToMany(mappedBy="criterio", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="criterio", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Opcion> opcions;
 
 	//bi-directional many-to-one association to Resultado

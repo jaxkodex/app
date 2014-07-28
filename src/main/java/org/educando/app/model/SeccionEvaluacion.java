@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name="seccion_evaluacion")
 @NamedQuery(name="SeccionEvaluacion.findAll", query="SELECT s FROM SeccionEvaluacion s")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="idSeccion")
 public class SeccionEvaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class SeccionEvaluacion implements Serializable {
 	private String seccionNombre;
 
 	//bi-directional many-to-one association to Criterio
-	@OneToMany(mappedBy="seccionEvaluacion", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="seccionEvaluacion", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Criterio> criterios;
 
 	//bi-directional many-to-one association to FormatoEvaluacion

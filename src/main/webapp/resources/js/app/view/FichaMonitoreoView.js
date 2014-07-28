@@ -11,14 +11,15 @@ var FichaMonitoreoListView = Backbone.View.extend({
 	},
 	template: _.template($('#fichaMonitoreoListTemplate').html()),
 	render: function () {
-		var container = document.createDocumentFragment();
+		var container;
+		container = document.createDocumentFragment();
 		this.$el.html(this.template());
 		
 		this.collection.each(function (val) {
 			var itemView = new FichaMonitoreoItemListView({
 				model: val
 			});
-			container.append(itemView.render().el);
+			container.appendChild(itemView.render().el);
 		});
 		this.$('tbody').append(container);
 		return this;
@@ -30,9 +31,12 @@ var FichaMonitoreoItemListView = Backbone.View.extend({
 		this.options = options;
 		this.listenTo(this.model, 'change', this.render);
 	},
+	tagName: 'tr',
 	template: _.template($('#fichaMonitoreoItemListTemplate').html()),
 	render: function () {
-		this.$el.html(this.template(this.model.toJSON()));
+		this.$el.html(this.template(_.extend(this.model.toJSON(), {
+			formatoFecha: this.model.getFormatoFecha()
+		})));
 		return this;
 	}
 });
@@ -55,7 +59,9 @@ app.FichaMonitoreoFormView = Backbone.View.extend({
 		'submit form': 'guardar'
 	},
 	render: function () {
-		this.$el.html(this.template(this.model.toJSON()));
+		this.$el.html(this.template(_.extend(this.model.toJSON(), {
+			formatoFecha: this.model.getFormatoFecha()
+		})));
 		return this;
 	},
 	addSeccion: function (evt) {
@@ -79,8 +85,20 @@ app.FichaMonitoreoFormView = Backbone.View.extend({
 	},
 	guardar: function (evt) {
 		evt.preventDefault();
+		var me, obj;
+		me = this;
 		this.updateObject(evt);
+		obj = _.extend(this.model.toJSON(), {seccionEvaluacions: undefined});
+		delete obj['seccionEvaluacions'];
+		this.collection.add(this.model);
 		this.model.save();
+		console.log(obj);/*
+		this.collection.create(this.model, {
+			wait: true,
+			success: function () {
+				me.model.save();
+			}
+		});*/
 	},
 	edit: function (evt) {
 		evt.preventDefault();
@@ -98,27 +116,30 @@ app.FichaMonitoreoFormView = Backbone.View.extend({
 		obj = this.model.toJSON();
 		seccions = obj.seccionEvaluacions;//_.extend([], this.model.get('seccionEvaluacions'));
 		_.each(inputs, function (val) {
-			var seccion, criterio, opcion, seccionIndex, criterioIndex, opcionIndex, input;
+			var seccion, criterio, opcion, seccionIndex, criterioIndex, opcionIndex, input, value;
 			input = $(val);
 			seccionIndex = input.data('seccion');
 			criterioIndex = input.data('criterio');
 			opcionIndex = input.data('opcion');
+			if (typeof input.data('field') == 'undefined') return;
+			if (input.data('field').toLowerCase().match(/^.*fecha.*/)) value = Date.parse(input.val(), 'd/M/yyyy');
+			else value = input.val();
 			if (typeof seccionIndex == 'undefined') {
-				obj[input.data('field')] = input.val();
+				obj[input.data('field')] = value;
 				return;
 			}
 			seccion = seccions[seccionIndex];
 			if (typeof opcionIndex == 'undefined' && typeof criterioIndex == 'undefined') {
-				seccion[input.data('field')] = input.val();
+				seccion[input.data('field')] = value;
 				return;
 			}
 			criterio = seccion.criterios[criterioIndex];
 			if (typeof opcionIndex == 'undefined') {
-				criterio[input.data('field')] = input.val();
+				criterio[input.data('field')] = value;
 				return;
 			}
 			opcion = criterio.opcions[opcionIndex];
-			opcion[input.data('field')] = input.val();
+			opcion[input.data('field')] = value;
 		});
 		this.model.set(obj);
 		this.trigger('render');

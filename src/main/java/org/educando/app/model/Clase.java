@@ -1,7 +1,11 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 import java.util.List;
 
@@ -18,29 +22,30 @@ public class Clase implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="id_clase")
-	private int idClase;
+	private Integer idClase;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name="clase_ffin")
 	private Date claseFfin;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name="clase_finicio")
 	private Date claseFinicio;
 
 	@Column(name="clase_nhinclusivos")
-	private int claseNhinclusivos;
+	private Integer claseNhinclusivos;
 
 	@Column(name="clase_nhombres")
-	private int claseNhombres;
+	private Integer claseNhombres;
 
 	@Column(name="clase_nminclusivos")
-	private int claseNminclusivos;
+	private Integer claseNminclusivos;
 
 	@Column(name="clase_nmujeres")
-	private int claseNmujeres;
+	private Integer claseNmujeres;
 
 	//bi-directional many-to-one association to ACargo
+	@JsonIgnore
 	@OneToMany(mappedBy="clase")
 	private List<ACargo> ACargos;
 
@@ -60,21 +65,23 @@ public class Clase implements Serializable {
 	private Turno turno;
 
 	//bi-directional many-to-many association to Desenvuelve
+	@JsonIgnore
 	@ManyToMany(mappedBy="clases")
 	private List<Desenvuelve> desenvuelves;
 
 	//bi-directional many-to-one association to Evaluacion
+	@JsonIgnore
 	@OneToMany(mappedBy="clase")
 	private List<Evaluacion> evaluacions;
 
 	public Clase() {
 	}
 
-	public int getIdClase() {
+	public Integer getIdClase() {
 		return this.idClase;
 	}
 
-	public void setIdClase(int idClase) {
+	public void setIdClase(Integer idClase) {
 		this.idClase = idClase;
 	}
 
@@ -94,35 +101,35 @@ public class Clase implements Serializable {
 		this.claseFinicio = claseFinicio;
 	}
 
-	public int getClaseNhinclusivos() {
+	public Integer getClaseNhinclusivos() {
 		return this.claseNhinclusivos;
 	}
 
-	public void setClaseNhinclusivos(int claseNhinclusivos) {
+	public void setClaseNhinclusivos(Integer claseNhinclusivos) {
 		this.claseNhinclusivos = claseNhinclusivos;
 	}
 
-	public int getClaseNhombres() {
+	public Integer getClaseNhombres() {
 		return this.claseNhombres;
 	}
 
-	public void setClaseNhombres(int claseNhombres) {
+	public void setClaseNhombres(Integer claseNhombres) {
 		this.claseNhombres = claseNhombres;
 	}
 
-	public int getClaseNminclusivos() {
+	public Integer getClaseNminclusivos() {
 		return this.claseNminclusivos;
 	}
 
-	public void setClaseNminclusivos(int claseNminclusivos) {
+	public void setClaseNminclusivos(Integer claseNminclusivos) {
 		this.claseNminclusivos = claseNminclusivos;
 	}
 
-	public int getClaseNmujeres() {
+	public Integer getClaseNmujeres() {
 		return this.claseNmujeres;
 	}
 
-	public void setClaseNmujeres(int claseNmujeres) {
+	public void setClaseNmujeres(Integer claseNmujeres) {
 		this.claseNmujeres = claseNmujeres;
 	}
 

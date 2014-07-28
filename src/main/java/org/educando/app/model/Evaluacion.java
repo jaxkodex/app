@@ -1,7 +1,13 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 
@@ -17,7 +23,7 @@ public class Evaluacion implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="id_evaluacion")
-	private int idEvaluacion;
+	private Integer idEvaluacion;
 
 	@Column(name="evaluacion_areas")
 	private String evaluacionAreas;
@@ -26,19 +32,19 @@ public class Evaluacion implements Serializable {
 	private String evaluacionDenominacon;
 
 	@Column(name="evaluacion_nhainclusivo")
-	private int evaluacionNhainclusivo;
+	private Integer evaluacionNhainclusivo;
 
 	@Column(name="evaluacion_nhasistentes")
-	private int evaluacionNhasistentes;
+	private Integer evaluacionNhasistentes;
 
 	@Column(name="evaluacion_nmainclusivo")
-	private int evaluacionNmainclusivo;
+	private Integer evaluacionNmainclusivo;
 
 	@Column(name="evaluacion_nmasistenetes")
-	private int evaluacionNmasistenetes;
+	private Integer evaluacionNmasistenetes;
 
 	//bi-directional many-to-one association to Conclusion
-	@OneToMany(mappedBy="evaluacion")
+	@OneToMany(mappedBy="evaluacion", fetch=FetchType.EAGER)
 	private List<Conclusion> conclusions;
 
 	//bi-directional many-to-one association to Clase
@@ -57,6 +63,8 @@ public class Evaluacion implements Serializable {
 	//bi-directional many-to-one association to FormatoEvaluacion
 	@ManyToOne
 	@JoinColumn(name="id_formato")
+	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="idFormato")
+	@JsonIdentityReference(alwaysAsId=true)
 	private FormatoEvaluacion formatoEvaluacion;
 
 	//bi-directional many-to-one association to Observador
@@ -71,11 +79,11 @@ public class Evaluacion implements Serializable {
 	public Evaluacion() {
 	}
 
-	public int getIdEvaluacion() {
+	public Integer getIdEvaluacion() {
 		return this.idEvaluacion;
 	}
 
-	public void setIdEvaluacion(int idEvaluacion) {
+	public void setIdEvaluacion(Integer idEvaluacion) {
 		this.idEvaluacion = idEvaluacion;
 	}
 
@@ -95,35 +103,35 @@ public class Evaluacion implements Serializable {
 		this.evaluacionDenominacon = evaluacionDenominacon;
 	}
 
-	public int getEvaluacionNhainclusivo() {
+	public Integer getEvaluacionNhainclusivo() {
 		return this.evaluacionNhainclusivo;
 	}
 
-	public void setEvaluacionNhainclusivo(int evaluacionNhainclusivo) {
+	public void setEvaluacionNhainclusivo(Integer evaluacionNhainclusivo) {
 		this.evaluacionNhainclusivo = evaluacionNhainclusivo;
 	}
 
-	public int getEvaluacionNhasistentes() {
+	public Integer getEvaluacionNhasistentes() {
 		return this.evaluacionNhasistentes;
 	}
 
-	public void setEvaluacionNhasistentes(int evaluacionNhasistentes) {
+	public void setEvaluacionNhasistentes(Integer evaluacionNhasistentes) {
 		this.evaluacionNhasistentes = evaluacionNhasistentes;
 	}
 
-	public int getEvaluacionNmainclusivo() {
+	public Integer getEvaluacionNmainclusivo() {
 		return this.evaluacionNmainclusivo;
 	}
 
-	public void setEvaluacionNmainclusivo(int evaluacionNmainclusivo) {
+	public void setEvaluacionNmainclusivo(Integer evaluacionNmainclusivo) {
 		this.evaluacionNmainclusivo = evaluacionNmainclusivo;
 	}
 
-	public int getEvaluacionNmasistenetes() {
+	public Integer getEvaluacionNmasistenetes() {
 		return this.evaluacionNmasistenetes;
 	}
 
-	public void setEvaluacionNmasistenetes(int evaluacionNmasistenetes) {
+	public void setEvaluacionNmasistenetes(Integer evaluacionNmasistenetes) {
 		this.evaluacionNmasistenetes = evaluacionNmasistenetes;
 	}
 

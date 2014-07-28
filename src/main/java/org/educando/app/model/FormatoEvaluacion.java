@@ -19,7 +19,8 @@ import java.util.List;
 @Entity
 @Table(name="formato_evaluacion")
 @NamedQuery(name="FormatoEvaluacion.findAll", query="SELECT f FROM FormatoEvaluacion f")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="idFormato")
 public class FormatoEvaluacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +29,7 @@ public class FormatoEvaluacion implements Serializable {
 	@Column(name="id_formato")
 	private int idFormato;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	@Column(name="formato_fecha")
 	private Date formatoFecha;
 
@@ -41,7 +42,7 @@ public class FormatoEvaluacion implements Serializable {
 	private List<Evaluacion> evaluacions;
 
 	//bi-directional many-to-one association to SeccionEvaluacion
-	@OneToMany(mappedBy="formatoEvaluacion", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="formatoEvaluacion", fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<SeccionEvaluacion> seccionEvaluacions;
 
 	public FormatoEvaluacion() {
