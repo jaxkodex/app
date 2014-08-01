@@ -3,7 +3,18 @@
  */
 
 
-var app = app || {};
+var app = {
+		meta: {
+			models: {},
+			collections: {},
+			routers: {},
+			views: {}
+		},
+		instance: {
+			collections: {}
+		},
+		controller: {}
+};
 
 $(function () {
 	app.collections = app.collections || {};

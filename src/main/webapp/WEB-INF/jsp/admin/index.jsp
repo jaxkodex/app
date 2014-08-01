@@ -37,8 +37,91 @@
 </div>
 
 <div class="container-fluid">
-	<div id="workspace" class="row"></div>
+	<div id="workspace" class="row">
+	</div>
 </div>
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-2">
+			<form>
+				<div class="row">
+				<div class="col-sm-2">
+					<label>Docente</label>
+					<input type="text" class="form-control input-sm" placeholder="DNI" />
+				</div>
+				<div class="col-sm-2">
+					<label>Apellido paterno</label>
+					<input type="text" class="form-control input-sm" placeholder="Apellido paterno" />
+				</div>
+				<div class="col-sm-2">
+					<label>Apellido materno</label>
+					<input type="text" class="form-control input-sm" placeholder="Apellido materno" />
+				</div>
+				<div class="col-sm-2">
+					<label>Primer nombre</label>
+					<input type="text" class="form-control input-sm" placeholder="Primer nombre" />
+				</div>
+				<div class="col-sm-4">
+					<label>Segundo nombre</label>
+					<input type="text" class="form-control input-sm" placeholder="Segundo nombre" />
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-2">
+					<label>Nivel</label>
+					<select class="form-control input-sm"></select>
+				</div>
+				<div class="col-sm-2">
+					<label>Grado</label>
+					<select class="form-control input-sm"></select>
+				</div>
+				<div class="col-sm-2">
+					<label>Seccion</label>
+					<select class="form-control input-sm"></select>
+				</div>
+				<div class="col-sm-2" style="margin-top: 10px;">
+					<label>Turno</label>
+				</div>
+				<div class="col-sm-4">
+					<div class="radio">
+						<label><input name="turno" type="radio" value="M" /> Mañana</label>
+					</div>
+					<div class="radio">
+						<label><input name="turno" type="radio" value="T" /> Tarde</label>
+					</div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-2">
+					<label>Periodo</label>
+					<select class="form-control input-sm"></select>
+				</div>
+				<div class="col-sm-2">
+					<label>Fecha inicio:</label>
+					<input type="text" class="form-control input-sm" />
+				</div>
+				<div class="col-sm-8">&nbsp;</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-3">
+					<label>Mujeres matriculadas:</label>
+					<input type="text" class="form-control input-sm" />
+				</div>
+				<div class="col-sm-3">
+					<label>Hombres matriculados:</label>
+					<input type="text" class="form-control input-sm" />
+				</div>
+				<div class="col-sm-3">
+					<label>Mujeres matriculadas:</label>
+					<input type="text" class="form-control input-sm" />
+				</div>
+				<div class="col-sm-3">
+					<label>Hombres matriculados:</label>
+					<input type="text" class="form-control input-sm" />
+				</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
 <!-- Templates -->
 
@@ -56,7 +139,7 @@
 				<li><a href="#cargo">Cargo</a></li>
 				<li><a href="#periodoacademico">Periodo Academico</a></li>
 				<li><a href="#estructuraie">Estructura IE</a></li>
-				<li><a href="#planadocente">Plana Docente</a></li>
+				<li><a href="#admin/planadocente">Plana Docente</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -472,6 +555,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.modal.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mainAdmin.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/PersonaModel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/InstitucionEducativaModel.js"></script>
@@ -509,6 +593,5 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/EvaluacionDocenteRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/ConfigRouter.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mainAdmin.js"></script>
 </body>
 </html>

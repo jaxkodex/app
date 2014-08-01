@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	padding: 60px;
+	padding: 60px 0px;
 }
 
 .navbar-default {
@@ -35,4 +35,19 @@ body {
 .criterio {
 	padding: 5px 0px 5px 0px;
 	background: #fff;
+}
+
+
+
+
+/****/
+.seccion-monitoreo {
+	border-top: solid 2px silver;
+}
+.criterio-monitoreo {
+	border-top: solid 1px silver;
+}
+.criterio-monitoreo:hover,
+.opcion-monitoreo:hover {
+	background: #f1f1f1;
 }

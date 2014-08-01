@@ -1,7 +1,10 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -23,6 +26,7 @@ public class Conclusion implements Serializable {
 	private String conclusionText;
 
 	//bi-directional many-to-one association to Evaluacion
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_evaluacion")
 	private Evaluacion evaluacion;

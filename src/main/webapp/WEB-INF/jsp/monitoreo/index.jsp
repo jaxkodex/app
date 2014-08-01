@@ -9,7 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/backbone.modal.css">
 	<script type="text/javascript">
-	var formatosData = ${formatosJSON};
+	var formatosData, baseUrl;
+	formatosData = ${formatosJSON};
+	baseUrl = '${pageContext.request.contextPath}/api';
 	</script>
 </head>
 <body>
@@ -38,11 +40,12 @@
 	<div id="workspace" class="row"></div>
 </div>
 
-<script type="text/template" id="formatoEvaluacion">
-		<div class="col-sm-2">
-			<h2>Educando</h2>
-		</div>
-		<div class="col-sm-10">
+<script type="text/template" id="workspaceTemplate">
+<div class="col-sm-2"></div>
+<div class="col-sm-10 main"></div>
+</script>
+
+<script type="text/template" id="fichaMonitoreoFormTemplate">
 			<div class="col-sm-12">
 				<h3>Ficha de monitoreo</h3>
 				<form>
@@ -71,26 +74,26 @@
 									</div>
 									<div class="col-sm-2">
 										<div class="checkbox">
-											<label><input type="checkbox" /> Inicial</label>
+											<label><input type="checkbox" <\% if(clase.seccion.grado.nivel.nivelNombre=='INICIAL') { %>checked<\% }%> disabled /> Inicial</label>
 										</div>
 									</div>
 									<div class="col-sm-2">
 										<div class="checkbox">
-											<label><input type="checkbox" /> Primaria</label>
+											<label><input type="checkbox" <\% if(clase.seccion.grado.nivel.nivelNombre=='PRIMARIA') { %>checked<\% }%> disabled /> Primaria</label>
 										</div>
 									</div>
 									<div class="col-sm-2">
 										<div class="checkbox">
-											<label><input type="checkbox" /> Secundaria</label>
+											<label><input type="checkbox" <\% if(clase.seccion.grado.nivel.nivelNombre=='SECUNDARIA') { %>checked<\% }%> disabled /> Secundaria</label>
 										</div>
 									</div>
 									<div class="col-sm-2">
 										<label>Grado/año</label>
-										<input type="text" class="form-control input-sm" />
+										<input type="text" class="form-control input-sm" value="<\%=clase.seccion.grado.gradoNombre%>" disabled />
 									</div>
 									<div class="col-sm-2">
 										<label>Seccion</label>
-										<input type="text" class="form-control input-sm" />
+										<input type="text" class="form-control input-sm" value="<\%=clase.seccion.seccionNombre%>" disabled />
 									</div>
 								</div>
 								<div class="row">
@@ -99,10 +102,10 @@
 									</div>
 									<div class="col-sm-2">
 										<div class="checkbox">
-											<label><input type="checkbox" /> Mañana</label>
+											<label><input type="checkbox" <\% if(clase.turno.turnoCodigo=='M') { %>checked<\% }%> disabled /> Mañana</label>
 										</div>
 										<div class="checkbox">
-											<label><input type="checkbox" /> Tarde</label>
+											<label><input type="checkbox" <\% if(clase.turno.turnoCodigo=='T') { %>checked<\% }%> disabled /> Tarde</label>
 										</div>
 									</div>
 									<div class="col-sm-4" style="margin-top: 10px;">
@@ -126,19 +129,19 @@
 											<label>Mujeres</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNmujeres%>" disabled />
 										</div>
 										<div class="col-sm-6">
 											<label>Hombres</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNhombres%>" disabled />
 										</div>
 										<div class="col-sm-6">
 											<label>Total</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNmujeres+clase.claseNhombres%>" disabled />
 										</div>
 									</div>
 									<div class="col-sm-2">
@@ -174,19 +177,19 @@
 											<label>Mujeres</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNminclusivos%>" disabled />
 										</div>
 										<div class="col-sm-6">
 											<label>Hombres</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNhinclusivos%>" disabled />
 										</div>
 										<div class="col-sm-6">
 											<label>Total</label>
 										</div>
 										<div class="col-sm-6">
-											<input class="form-control input-sm" type="text" />
+											<input class="form-control input-sm" type="text" value="<\%=clase.claseNhinclusivos+clase.claseNminclusivos%>" disabled />
 										</div>
 									</div>
 									<div class="col-sm-2">
@@ -217,7 +220,40 @@
 						</div>
 						<div class="col-sm-12">
 							<h4>DESARROLLO DE LA SESIÓN DE APRENDIZAJE</h4>
-							<div class="col-sm-12"></div>
+							<div class="col-sm-12">
+								<\% _.each(seccions, function (value, index) { %>
+								<div class="row seccion-monitoreo">
+								<div class="col-sm-1 text-right"><b><\%=value.seccionCodigo%></b></div>
+								<div class="col-sm-11"><b><\%=value.seccionNombre%></b></div>
+								</div>
+								<div class="row">
+								<div class="col-sm-1 col-sm-offset-10 text-center"><b>SI</b></div>
+								<div class="col-sm-1 text-center"><b>NO</b></div>
+								</div>
+									<\% _.each(value.criterios, function (val, ind) { %>
+									<div class="row criterio-monitoreo">
+									<div class="col-sm-1 text-right"><\%=ind+1%></div>
+									<div class="col-sm-9"><\%=val.criterioDescripcion%></div>
+									<\% if (val.opcions.length < 1) { %>
+									<div class="col-sm-1 text-center"><input type="radio" name="criterio-<\%=index%>-<\%=ind%>" /></div>
+									<div class="col-sm-1 text-center"><input type="radio" name="criterio-<\%=index%>-<\%=ind%>" /></div>
+									<\% } else { %>
+									<div class="col-sm-2">&nbsp;</div>
+									<\% } %>
+									</div>
+										<\% _.each(val.opcions, function (v, i) { %>
+											<div class="row opcion-monitoreo">
+											<div class="col-sm-1 col-sm-offset-1"><\%=i+1%></div>
+											<div class="col-sm-8"><\%=v.opcionDescripcion%></div>
+											<div class="col-sm-1 text-center"><input type="radio" name="opcion-<\%=index%>-<\%=ind%>-<\%=i%>" /></div>
+											<div class="col-sm-1 text-center"><input type="radio" name="opcion-<\%=index%>-<\%=ind%>-<\%=i%>" /></div>
+											</div>
+										<\% }); %>
+									<\% }); %>
+								<\% }) %>
+								</tbody>
+								</table>
+							</div>
 						</div>
 						<div class="col-sm-12">
 							<h4>CONCLUSIONES GENERALES PRODUCTO DE LA ASESORÍA PERSONALIZADA</h4>
@@ -242,7 +278,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
 </script>
 
 
@@ -253,5 +288,22 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/backbone.modal.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/mainMonitoreo.js"></script>
+	
+	<!-- Models -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/FichaMonitoreoModel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/model/EvaluacionModel.js"></script>
+	
+	<!-- Collections -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/FichaMonitoreoCollection.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/collection/EvaluacionCollection.js"></script>
+	
+	<!-- Views -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/MonitoreoView.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
+	
+	<!-- Routers -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/MonitoreoRouter.js"></script>
 </body>
 </html>

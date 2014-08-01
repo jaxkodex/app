@@ -45,8 +45,7 @@ public class Clase implements Serializable {
 	private Integer claseNmujeres;
 
 	//bi-directional many-to-one association to ACargo
-	@JsonIgnore
-	@OneToMany(mappedBy="clase")
+	@OneToMany(mappedBy="clase", fetch=FetchType.EAGER)
 	private List<ACargo> ACargos;
 
 	//bi-directional many-to-one association to PeriodoAcademico

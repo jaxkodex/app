@@ -1,7 +1,11 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -18,10 +22,12 @@ public class Desenvuelve implements Serializable {
 	private DesenvuelvePK id;
 
 	//bi-directional many-to-one association to ACargo
+	@JsonIgnore
 	@OneToMany(mappedBy="desenvuelve")
 	private List<ACargo> ACargos;
 
 	//bi-directional many-to-many association to Clase
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="a_cargo"
@@ -36,6 +42,7 @@ public class Desenvuelve implements Serializable {
 	private List<Clase> clases;
 
 	//bi-directional many-to-one association to Evaluacion
+	@JsonIgnore
 	@OneToMany(mappedBy="desenvuelve")
 	private List<Evaluacion> evaluacions;
 

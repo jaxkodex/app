@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.List;
@@ -53,6 +54,7 @@ public class Evaluacion implements Serializable {
 	private Clase clase;
 
 	//bi-directional many-to-one association to Desenvuelve
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="id_cargo", referencedColumnName="id_cargo"),
@@ -73,6 +75,7 @@ public class Evaluacion implements Serializable {
 	private Observador observador;
 
 	//bi-directional many-to-one association to Resultado
+	@JsonIgnore
 	@OneToMany(mappedBy="evaluacion")
 	private List<Resultado> resultados;
 

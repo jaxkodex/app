@@ -20,7 +20,8 @@ var AdminRouter = Backbone.Router.extend({
 		'cargo/edit(/:id)': 'editcargo',
 		'periodoacademico(/)': 'periodoacademicoIndex',
 		'periodoacademico/edit(/:id)': 'editperiodoacademico',
-		'estructuraie(/)': 'estructuraieIndex'
+		'estructuraie(/)': 'estructuraieIndex',
+		'admin/planadocente(/)': 'planaDocente'
 	},
 	institucioneducativa: function () {
 		var view = new InstitucionEducativaListView ({
@@ -137,5 +138,8 @@ var AdminRouter = Backbone.Router.extend({
 				view.options.institucionCollection.trigger('add');
 			}
 		});
+	},
+	planaDocente: function () {
+		//
 	}
 });

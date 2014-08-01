@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -39,6 +42,7 @@ public class SeccionEvaluacion implements Serializable {
 	//bi-directional many-to-one association to FormatoEvaluacion
 	@ManyToOne
 	@JoinColumn(name="id_formato")
+	@Fetch(FetchMode.JOIN)
 	private FormatoEvaluacion formatoEvaluacion;
 
 	public SeccionEvaluacion() {

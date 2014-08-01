@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the a_cargo database table.
@@ -24,6 +26,7 @@ public class ACargo implements Serializable {
 	private Area area;
 
 	//bi-directional many-to-one association to Clase
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="clase_id_clase", insertable=false, updatable=false)
 	private Clase clase;

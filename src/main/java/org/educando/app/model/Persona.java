@@ -1,7 +1,11 @@
 package org.educando.app.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -31,10 +35,12 @@ public class Persona implements Serializable {
 	private String personaSnombre;
 
 	//bi-directional many-to-one association to Observador
+	@JsonIgnore
 	@OneToMany(mappedBy="persona")
 	private List<Observador> observadors;
 
 	//bi-directional many-to-many association to Cargo
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name="desenvuelve"

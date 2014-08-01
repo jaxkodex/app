@@ -4,6 +4,7 @@
 
 
 var FichaMonitoreoModel = Backbone.Model.extend({
+	idAttribute: 'idFormato',
 	defaults: {
 		formatoVersion: '1.0',
 		formatoFecha: (new Date).getTime(),

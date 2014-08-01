@@ -23,8 +23,15 @@ public class EvaluacionApiController {
 
 	@RequestMapping(value="/api/evaluacion", method=RequestMethod.GET)
 	public @ResponseBody List<Evaluacion> publicApiList (@RequestParam(required=false) Integer idObservador) {
-		if (idObservador != null) return evaluacionService.listByObservadorId(idObservador);
-		return evaluacionService.listAll();
+		List<Evaluacion> evaluaciones;
+		if (idObservador != null) evaluaciones = evaluacionService.listByObservadorId(idObservador);
+		else evaluaciones = evaluacionService.listAll();
+		return evaluaciones;
+	}
+
+	@RequestMapping(value="/api/evaluacion/{idEvaluacion}", method=RequestMethod.GET)
+	public @ResponseBody Evaluacion publicApiLoad (@PathVariable Integer idEvaluacion) {
+		return evaluacionService.load(idEvaluacion);
 	}
 
 	@RequestMapping(value="/api/admin/evaluacion", method=RequestMethod.POST)

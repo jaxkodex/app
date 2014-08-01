@@ -28,7 +28,7 @@ public class MonitoreoController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		model.addAttribute(formatosJSON);
+		model.addAttribute("formatosJSON", formatosJSON);
 		return "monitoreo/index";
 	}
 }
