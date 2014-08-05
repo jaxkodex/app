@@ -12,6 +12,9 @@
 
 var app = app || {};
 
+app.meta = {
+		views: {}
+};
 $(function () {
 	/*
 	app.models.persona = new Persona();

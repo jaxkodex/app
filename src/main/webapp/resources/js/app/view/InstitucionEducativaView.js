@@ -2,6 +2,8 @@
  * 
  */
 
+/*
+
 var InstitucionEducativaListView = Backbone.View.extend({
 	initialize: function (options) {
 		var options = options || {};
@@ -115,4 +117,53 @@ var InstitucionEducativaFormView = Backbone.View.extend({
 			}
 		});
 	}
+});
+
+*/
+
+
+define(['AdminApplication',
+        'collection/InstitucionEducativaCollection'], function (app,
+        		IntitucionEducativaCollection) {
+	var InstitucionEducativaListView, InstitucionEducativaListItemView;
+	
+	InstitucionEducativaListItemView = Backbone.View.extend({
+		tagName: 'tr',
+		template: _.template($('#institucionEducativaItemList').html()),
+		events: {
+			'click input[type=checkbox]': 'toggleActive',
+			'click .delete': 'destroy'
+		},
+		render: function () {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+		toggleActive: function () {
+			this.model.save({ institucionActivo: (!this.model.get('institucionActivo'))*1 });
+		},
+		destroy: function () {
+			this.model.destroy();
+		}
+	});
+	
+	InstitucionEducativaListView = Backbone.View.extend({
+		template: _.template($('#institucionEducativaList').html()),
+		render: function () {
+			var container = document.createDocumentFragment();
+			this.$el.html(this.template());
+			this.collection.each(function (val) {
+				var item = new InstitucionEducativaListItemView({
+					model: val
+				});
+				container.appendChild(item.render().el);
+			});
+			this.$('tbody').empty().append(container);
+			return this;
+		}
+	});
+	
+	app.meta.views.InstitucionEducativaListView = InstitucionEducativaListView;
+	return {
+		InstitucionEducativaListView: InstitucionEducativaListView
+	};
 });

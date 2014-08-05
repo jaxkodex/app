@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+/*
 var CargoListView = Backbone.View.extend({
 	initialize: function (options) {
 		var options = options || {};
@@ -100,4 +100,61 @@ var CargoFormView = Backbone.View.extend({
 			}
 		});
 	}
+});
+
+*/
+
+define(['backbone', 
+        'collection/CargoCollection', 
+        'AdminApplication'], function (Backbone,
+        		Collection, app) {
+	var CargoListItemView;
+	
+	CargoListItemView = Backbone.View.extend({
+		initialize: function (options) {
+			this.options = options;
+			
+			this.listenTo(this.model, 'change', this.render);
+		},
+		tagName: 'tr',
+		template: _.template($('#cargoItemList').html()),
+		events: {
+			'click .delete': 'destroy'
+		},
+		render: function () {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+		destroy: function (evt) {
+			evt.preventDefault();
+			this.model.destroy();
+		}
+	});
+	
+	app.meta.views.CargoListView = Backbone.View.extend({
+		initialize: function (options) {
+			this.options = options;
+
+			this.listenTo(this.collection, 'reset add remove', this.render);
+		},
+		tagName: 'div',
+		className: 'col-sm-12',
+		template: _.template($('#cargoList').html()),
+		render: function () {
+			var me = this, container = document.createDocumentFragment();
+			this.$el.html(this.template());
+			this.collection.each(function (val) {
+				var view = new CargoListItemView({
+					model: val
+				});
+				container.appendChild(view.render().el);
+			});
+			me.$el.find('tbody').append(container);
+			return this;
+		}
+	});
+	
+	return {
+		CargoListView: app.meta.views.CargoListView
+	};
 });

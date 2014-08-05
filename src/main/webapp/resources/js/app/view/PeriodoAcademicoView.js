@@ -1,73 +1,6 @@
 /**
  * 
- */
 
-var PeriodoAcademicoListView = Backbone.View.extend({
-	initialize: function (options) {
-		var options = options || {};
-		if (typeof options.router != 'undefined') {
-			this.router = options.router;
-		}
-
-		this.listenTo(this.collection, 'reset add remove', this.render);
-	},
-	events: {
-		'click .new': 'addNew'
-	},
-	tagName: 'div',
-	className: 'col-sm-12',
-	template: _.template($('#periodoAcademicoList').html()),
-	render: function () {
-		var me = this, container = document.createDocumentFragment();
-		this.$el.html(this.template());
-		this.collection.each(function (val) {
-			var view = new PeriodoAcademicoItemListView({
-				model: val,
-				router: me.router
-			});
-			container.appendChild(view.render().el);
-		});
-		me.$el.find('tbody').append(container);
-		return this;
-	},
-	addNew: function () {
-		this.router.navigate('periodoacademico/edit', {trigger: true});
-	}
-});
-
-var PeriodoAcademicoItemListView = Backbone.View.extend({
-	initialize: function (options) {
-		var options = options || {};
-		if (typeof options.router != 'undefined') {
-			this.router = options.router;
-		}
-		
-		this.listenTo(this.model, 'change', this.render);
-	},
-	tagName: 'tr',
-	template: _.template($('#periodoAcademicoItemList').html()),
-	events: {
-		'click input[type=checkbox]': 'toggleActive',
-		'click .delete': 'destroy',
-		'click .edit': 'edit'
-	},
-	render: function () {
-		this.$el.html(this.template(this.model.toJSON()));
-		return this;
-	},
-	toggleActive: function (evt) {
-		evt.preventDefault();
-		//this.model.save({ institucionActivo: (!this.model.get('institucionActivo'))*1 });
-	},
-	destroy: function (evt) {
-		evt.preventDefault();
-		this.model.destroy();
-	},
-	edit: function (evt) {
-		evt.preventDefault();
-		this.router.navigate('periodoacademico/edit/'+this.model.id, {trigger: true});
-	}
-});
 
 var PeriodoAcademicoFormView = Backbone.View.extend({
 	initialize: function (options) {
@@ -118,4 +51,65 @@ var PeriodoAcademicoFormView = Backbone.View.extend({
 			}
 		});
 	}
+});
+*/
+
+define (['backbone', 
+         'AdminApplication',
+         'collection/PeriodoAcademicoCollection'], function (Backbone, 
+        		 app,
+        		 PeriodoAcademicoCollection) {
+	var PeriodoAcademicoItemListView = Backbone.View.extend({
+		initialize: function (options) {
+			this.options = options;
+			
+			this.listenTo(this.model, 'change', this.render);
+		},
+		tagName: 'tr',
+		template: _.template($('#periodoAcademicoItemList').html()),
+		events: {
+			'click input[type=checkbox]': 'toggleActive',
+			'click .delete': 'destroy'
+		},
+		render: function () {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+		toggleActive: function (evt) {
+			evt.preventDefault();
+			//this.model.save({ institucionActivo: (!this.model.get('institucionActivo'))*1 });
+		},
+		destroy: function (evt) {
+			evt.preventDefault();
+			this.model.destroy();
+		}
+	});
+	
+	app.meta.views.PeriodoAcademicoListView = Backbone.View.extend({
+		initialize: function (options) {
+			this.options;
+
+			this.listenTo(this.collection, 'reset add remove', this.render);
+		},
+		tagName: 'div',
+		className: 'col-sm-12',
+		template: _.template($('#periodoAcademicoList').html()),
+		render: function () {
+			var me = this, container = document.createDocumentFragment();
+			this.$el.html(this.template());
+			this.collection.each(function (val) {
+				var view = new PeriodoAcademicoItemListView({
+					model: val,
+					router: me.router
+				});
+				container.appendChild(view.render().el);
+			});
+			me.$el.find('tbody').append(container);
+			return this;
+		}
+	});
+	
+	return {
+		PeriodoAcademicoListView: app.meta.views.PeriodoAcademicoListView
+	};
 });

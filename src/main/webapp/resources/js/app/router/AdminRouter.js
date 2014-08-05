@@ -2,6 +2,7 @@
  * 
  */
 
+/*
 var app = app || {};
 
 var AdminRouter = Backbone.Router.extend({
@@ -142,4 +143,38 @@ var AdminRouter = Backbone.Router.extend({
 	planaDocente: function () {
 		//
 	}
+});
+
+*/
+
+
+define(['backbone', 'AdminApplication'], function (Backbone, app) {
+	var AdminRouter;
+	
+	AdminRouter = Backbone.Router.extend({
+		routes: {
+			'cargo': 'showCargo',
+			'institucioneducativa': 'showInstitucionEducativa',
+			'periodoacademico': 'showPeriodoAcademico',
+			'estructuraie': 'showEstructuraie',
+			'admin/planadocente': 'showPlanadocente'
+		},
+		showCargo: function () {
+			app.showCargoListView();
+		},
+		showInstitucionEducativa: function () {
+			app.showInstitucionEducativaListView();
+		},
+		showPeriodoAcademico: function () {
+			app.showPeriodoAcademico();
+		},
+		showEstructuraie: function () {
+			app.showEstructuraie();
+		},
+		showPlanadocente: function () {
+			app.showPlanadocente();
+		}
+	});
+	
+	return AdminRouter;
 });

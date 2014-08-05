@@ -8,16 +8,17 @@
 	<meta charset="utf-8">
 	<title>Administración</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/loadingbar.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/backbone.modal.css">
 	
 	<script type="text/javascript">
-		baseUrl = '${pageContext.request.contextPath}/api/admin';
+		var baseUrl = '${pageContext.request.contextPath}/api/admin';
 	</script>
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
+<!-- div class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -34,13 +35,12 @@
 			 </ul>
 		</div>
 	</div>
-</div>
+</div -->
 
-<div class="container-fluid">
-	<div id="workspace" class="row">
-	</div>
+<div class="container">
+	<div id="workspace" class="row"></div>
 </div>
-	<div class="row">
+	<!--div class="row">
 		<div class="col-sm-10 col-sm-offset-2">
 			<form>
 				<div class="row">
@@ -121,20 +121,25 @@
 				</div>
 			</form>
 		</div>
-	</div>
+	</div-->
 
 <!-- Templates -->
 
 <script type="text/template" id="workspaceTemplate">
 <div class="col-sm-2">
+	<img src="${pageContext.request.contextPath}/resources/img/educando.png" class="img-responsive" alt="Educando" />
 	<ul class="list-unstyled">
+		<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> Jorge Vilca</a></li>
+	</ul>
+
+	<ul class="list-unstyled menu">
 		<li>Configuración
-			<ul>
+			<ul class="list-unstyled">
 				<li><a href="#config/fichamonitoreo">Ficha de Monitoreo</a></li>
 			</ul>
 		</li>
 		<li>Administración
-			<ul>
+			<ul class="list-unstyled">
 				<li><a href="#institucioneducativa">Institucion Educativa</a></li>
 				<li><a href="#cargo">Cargo</a></li>
 				<li><a href="#periodoacademico">Periodo Academico</a></li>
@@ -144,10 +149,23 @@
 		</li>
 	</ul>
 </div>
-<div class="col-sm-10"></div>
+<div class="col-sm-10">
+	<div class="col-sm-12 clearfix">
+		<ul class="nav nav-pills pull-right custom-nav">
+			<li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+			<li class="active"><a href="${pageContext.request.contextPath}/admin"><span class="glyphicon glyphicon-cog"></span> Administración</a></li>
+			<li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+		</ul>
+	</div>
+	<div class="col-sm-12 displayArea"></div>
+</div>
 </script>
 <script type="text/template" id="institucionEducativaList">
-<div class="col-sm-12"><button class="btn btn-sm btn-primary pull-right new"><span class="glyphicon glyphicon-plus"></span></button></div>
+<h2>Instituciones educativas</h2>
+<div class="col-sm-12 clearfix">
+	<a class="btn btn-link pull-right" href="#intitucioneducativa/edit"><span class="glyphicon glyphicon-plus"></span></a>
+	<!--button class="btn btn-sm btn-primary pull-right new"><span class="glyphicon glyphicon-plus"></span></button-->
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -191,7 +209,10 @@
 </from>
 </script>
 <script type="text/template" id="periodoAcademicoList">
-<a class="btn btn-default btn-sm pull-right" href="#periodoacademico/edit"><span class="glyphicon glyphicon-plus"></span></a>
+<h2>Periodo Académico</h2>
+<div class="col-sm-12 clearfix">
+<a class="btn btn-link btn-sm pull-right" href="#periodoacademico/edit"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -240,7 +261,10 @@
 </from>
 </script>
 <script type="text/template" id="cargoList">
-<a class="btn btn-default btn-sm pull-right" href="#cargo/edit"><span class="glyphicon glyphicon-plus"></span></a>
+<h2>Cargos</h2>
+<div class="col-sm-12 clearfix">
+<a class="btn btn-link btn-sm pull-right" href="#cargo/edit"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -258,8 +282,8 @@
 <td><\%=cargoDescripcion%></td>
 <td><input type="checkbox" <\% if (activo == true) { %>checked<\% }%> /></td>
 <td>
-	<button class="btn btn-sm btn-default edit"><span class="glyphicon glyphicon-pencil"></span></button>
-	<button class="btn btn-sm btn-default delete"><span class="glyphicon glyphicon-remove"></span></button>
+	<button class="btn btn-sm btn-link"><span class="glyphicon glyphicon-pencil"></span></button>
+	<button class="btn btn-sm btn-link delete"><span class="glyphicon glyphicon-remove"></span></button>
 </td>
 </script>
 <script type="text/template" id="cargoForm">
@@ -283,12 +307,15 @@
 </from>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativa">
-<div class="col-sm-12">
+<h2>Estructura IE</h2>
+<div class="col-sm-12 clearfix">
 <button class="btn btn-default btn-sm pull-right addnivel"><span class="glyphicon glyphicon-plus"></span> Agregar nivel</button>
 <div class="col-sm-2 pull-left"><select class="form-control input-sm" name="intitucion_educativa"></select></div>
 </div>
+<div class="col-sm-12">
 <ul class="tree list-unstyled"><!--Main-->
 </ul>
+</div>
 </script>
 <script type="text/template" id="estructuraInstitucionEducativaNivel">
 <span class="desc hidden_on_editing"><\%=nivelNombre%></span>
@@ -360,6 +387,41 @@
 	<label for="idCargo">Cargo</label>
 	<select class="form-control" id="idCargo">
 	</select>
+</div>
+</form>
+</script>
+<script type="text/template" id="planadocenteTemplate">
+<h2>Plana Docente</h2>
+<form>
+<div class="col-sm-6">
+	<label>IE</label>
+	<select class="form-control input-sm"></select>
+</div>
+<div class="col-sm-6">
+	<label>Periodo</label>
+	<select class="form-control input-sm"></select>
+</div>
+<div class="col-sm-12">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nivel</th>
+				<th>Grado</th>
+				<th>Seccion</th>
+				<th>Área</th>
+				<th>Docente</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Inicial</td>
+				<td>PRIMERO</td>
+				<td>A</td>
+				<td>COM</td>
+				<td>JUAn</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </form>
 </script>
@@ -547,7 +609,9 @@
 					</div>
 				</div>
 </script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
 
+<!-- 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/underscore.js"></script>
@@ -592,6 +656,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/AdminRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/EvaluacionDocenteRouter.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/ConfigRouter.js"></script>
-	
+	-->
+	<script data-main="${pageContext.request.contextPath}/resources/js/app/mainAdmin.js" src="${pageContext.request.contextPath}/resources/js/require.js"></script>
 </body>
 </html>

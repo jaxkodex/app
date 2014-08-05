@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Administración</title>
+	<title>Educando</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/styles.css">
 	
@@ -11,7 +11,7 @@
 	</script>
 </head>
 <body>
-
+<!-- 
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -30,7 +30,7 @@
 		</div>
 	</div>
 </div>
-<!-- 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">SME</a>
@@ -49,14 +49,30 @@
 		</div>
 	</div> -->
 
-<div class="container-fluid">
+<div class="container">
 	<div id="workspace" class="row"></div>
 </div>
 
 <!-- Templates -->
 
 <script type="text/template" id="workspaceTemplate">
-<div class="col-sm-12"></div>
+<div class="col-sm-2">
+	<img src="${pageContext.request.contextPath}/resources/img/educando.png" class="img-responsive" alt="Educando" />
+	<ul class="list-unstyled">
+		<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> Jorge Vilca</a></li>
+	</ul>
+</div>
+<div class="col-sm-10">
+	<div class="col-sm-12 clearfix">
+		<ul class="nav nav-pills pull-right custom-nav">
+			<li class="active"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin"><span class="glyphicon glyphicon-th-list"></span> Monitoreo</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin"><span class="glyphicon glyphicon-cog"></span> Administración</a></li>
+			<li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+		</ul>
+	</div>
+	<div class="col-sm-12 displayArea"></div>
+</div>
 </script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.js"></script>
@@ -65,11 +81,11 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
 	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/main.js"></script>
+	
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/view/WorkspaceView.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/router/WorkspaceRouter.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/app/main.js"></script>
 </body>
 </html>

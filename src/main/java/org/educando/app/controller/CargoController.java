@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/cargo")
 public class CargoController {
 	public static final Logger logger = Logger.getLogger(CargoController.class);
 	@Autowired
 	CargoService cargoService;
 
-	@RequestMapping(value= "", method=RequestMethod.GET)
+	@RequestMapping(value="/api/admin/cargo", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Cargo> index (@RequestParam(required=false) String query,
 			@RequestParam(required=false, defaultValue="A") String active) {
@@ -30,7 +29,7 @@ public class CargoController {
 	}
 
 
-	@RequestMapping(value= "{idCargo}", method=RequestMethod.GET)
+	@RequestMapping(value= "/api/admin/cargo/{idCargo}", method=RequestMethod.GET)
 	@ResponseBody
 	public Cargo load (@PathVariable Integer idCargo) {
 		logger.debug("Load Object");
@@ -38,14 +37,14 @@ public class CargoController {
 	}
 
 
-	@RequestMapping(value= "{idCargo}", method=RequestMethod.DELETE)
+	@RequestMapping(value= "/api/admin/cargo/{idCargo}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public void delete (@PathVariable Integer idCargo) {
 		cargoService.delete(idCargo);
 	}
 
 
-	@RequestMapping(value= "", method=RequestMethod.POST)
+	@RequestMapping(value= "/api/admin/cargo", method=RequestMethod.POST)
 	@ResponseBody
 	public Cargo create (@RequestBody Cargo cargo) {
 		return cargoService.create(cargo);
