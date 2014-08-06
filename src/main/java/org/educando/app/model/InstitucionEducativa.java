@@ -37,6 +37,18 @@ public class InstitucionEducativa implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy="institucionEducativa")
 	private List<Nivel> nivels;
+	
+	@ManyToMany
+	@JoinTable(
+		name="institucion_educativa_has_usuario"
+		, joinColumns={
+			@JoinColumn(name="id_institucion")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="username")
+			}
+		)
+	private List<Usuario> usuarios;
 
 	public InstitucionEducativa() {
 	}

@@ -1,3 +1,4 @@
+<%@ taglib prefix='security' uri='http://www.springframework.org/security/tags' %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -59,7 +60,7 @@
 <div class="col-sm-2">
 	<img src="${pageContext.request.contextPath}/resources/img/educando.png" class="img-responsive" alt="Educando" />
 	<ul class="list-unstyled">
-		<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> Jorge Vilca</a></li>
+		<li class="text-center"><a href="#"><span class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username" /></a></li>
 	</ul>
 </div>
 <div class="col-sm-10">
