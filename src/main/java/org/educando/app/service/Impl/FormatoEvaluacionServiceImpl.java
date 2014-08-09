@@ -6,7 +6,6 @@ import org.educando.app.model.Opcion;
 import org.educando.app.model.SeccionEvaluacion;
 import org.educando.app.repository.FormatoEvaluacionRepository;
 import org.educando.app.service.FormatoEvaluacionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

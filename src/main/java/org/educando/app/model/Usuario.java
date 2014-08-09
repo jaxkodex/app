@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,17 +29,19 @@ public class Usuario implements Serializable, UserDetails {
 
 	private boolean habilitado;
 
+	@JsonIgnore
 	private String password;
 
-	@Column(name="persona_dni")
-	private String personaDni;
+	@JoinColumn(name="persona_dni")
+	private Persona persona;
 
 	//bi-directional many-to-many association to Role
+	@JsonIgnore
 	@ManyToMany(mappedBy="usuarios", fetch=FetchType.EAGER)
 	private List<Role> roles;
 
 	//bi-directional many-to-many association to Role
-	@ManyToMany(mappedBy="usuarios")
+	@ManyToMany(mappedBy="usuarios", fetch=FetchType.EAGER)
 	private List<InstitucionEducativa> institucionEducativas;
 
 	public Usuario() {
@@ -67,12 +71,12 @@ public class Usuario implements Serializable, UserDetails {
 		this.password = password;
 	}
 
-	public String getPersonaDni() {
-		return this.personaDni;
+	public Persona getPersona() {
+		return this.persona;
 	}
 
-	public void setPersonaDni(String personaDni) {
-		this.personaDni = personaDni;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	public List<Role> getRoles() {
@@ -92,21 +96,25 @@ public class Usuario implements Serializable, UserDetails {
 		return authorities;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return this.habilitado;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return this.habilitado;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return this.habilitado;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		return this.habilitado;
